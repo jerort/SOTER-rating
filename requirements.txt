@@ -1,0 +1,21 @@
+arosics==1.12.1
+fiona>=1.9
+geopandas>=0.13
+gdal-installer #only for Windows issues with arosics; after installation run .\.venv\Scripts\install-gdal.exe
+matplotlib==3.10.6
+numpy==2.2.6
+opencv-python==4.11.0.86
+pandas==2.2.3
+pillow==11.3.0
+rasterio==1.4.3
+scipy==1.16.0
+shapely>=2.0
+scikit-image>=0.19
+torch==2.7.*
+torchvision==0.22.*
+dists-pytorch
+scikit-learn
+openpyxl
+python-pptx
+# optional, only for some backbones in src/rating.py:
+# timm
