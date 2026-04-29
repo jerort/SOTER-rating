@@ -18,7 +18,7 @@ import src.rating as rt
 DATA_ROOT       = Path(r"C:\data\Carreteras\HD15_8m")
 LABELS_XLSX     = Path(r"D:\SOTER\SOTER\scripts\rating\data_inspection\labels.xlsx")
 DATASETS_DIR    = Path(r"D:\SOTER\SOTER\scripts\rating\datasets")
-EXPERIMENT_NAME = "experiment_20260308_142636_CET"
+EXPERIMENT_NAME = "E12"
 
 FINAL_SHEET = "FINAL"
 IMG_WIDTH   = 54

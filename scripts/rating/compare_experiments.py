@@ -7,7 +7,7 @@ import pandas as pd
 EXPERIMENTS_DIR = Path(__file__).parent / "experiments"
 OUTPUT_XLSX     = Path(__file__).parent / "experiments_comparison.xlsx"
 
-DATASETS = ["val", "test"]
+DATASETS = ["test"]
 
 # ── helpers ────────────────────────────────────────────────────────────────
 
