@@ -1,0 +1,292 @@
+Using device: cuda
+Experiment folder: D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260308_093837_CET
+
+--- Configuration ---
+BACKBONE              : vit_b_16  (blocks unfrozen: 0)
+USE_CLASS_WEIGHTS     : False
+USE_OVERSAMPLING      : True
+USE_CHANNEL_ATTENTION : False
+EPOCHS=100  BATCH_SIZE=32  LR=0.001  WD=0.1  SMOOTHL1_BETA=1
+USE_BONN=False  BONN_MODE=amae  BONN_SIGMA=0.388
+Augmented classes           : [1, 4, 5]
+Oversampling: WeightedRandomSampler active.
+
+Unfrozen modules     : ['fc']
+Trainable parameters : 769
+
+Starting training for 100 epochs...
+Epoch 1/100 | train_loss: 0.7640 | val_loss: 0.4804 | val_mae: 0.8497
+  Classes seen: c1: 873 (873 aug)  c2: 898 (0 aug)  c3: 864 (0 aug)  c4: 799 (799 aug)  c5: 834 (834 aug)
+  → Saved best model (val_loss: 0.4804)
+Epoch 2/100 | train_loss: 0.5811 | val_loss: 0.3817 | val_mae: 0.7445
+  Classes seen: c1: 881 (881 aug)  c2: 888 (0 aug)  c3: 794 (0 aug)  c4: 828 (828 aug)  c5: 877 (877 aug)
+  → Saved best model (val_loss: 0.3817)
+Epoch 3/100 | train_loss: 0.5545 | val_loss: 0.4175 | val_mae: 0.7853
+  Classes seen: c1: 896 (896 aug)  c2: 828 (0 aug)  c3: 854 (0 aug)  c4: 832 (832 aug)  c5: 858 (858 aug)
+Epoch 4/100 | train_loss: 0.5271 | val_loss: 0.3862 | val_mae: 0.7481
+  Classes seen: c1: 861 (861 aug)  c2: 872 (0 aug)  c3: 847 (0 aug)  c4: 843 (843 aug)  c5: 845 (845 aug)
+Epoch 5/100 | train_loss: 0.5297 | val_loss: 0.4085 | val_mae: 0.7797
+  Classes seen: c1: 881 (881 aug)  c2: 848 (0 aug)  c3: 877 (0 aug)  c4: 828 (828 aug)  c5: 834 (834 aug)
+Epoch 6/100 | train_loss: 0.5118 | val_loss: 0.4159 | val_mae: 0.7850
+  Classes seen: c1: 866 (866 aug)  c2: 793 (0 aug)  c3: 848 (0 aug)  c4: 894 (894 aug)  c5: 867 (867 aug)
+Epoch 7/100 | train_loss: 0.4811 | val_loss: 0.4195 | val_mae: 0.7866
+  Classes seen: c1: 840 (840 aug)  c2: 824 (0 aug)  c3: 864 (0 aug)  c4: 904 (904 aug)  c5: 836 (836 aug)
+Epoch 8/100 | train_loss: 0.4950 | val_loss: 0.4095 | val_mae: 0.7699
+  Classes seen: c1: 848 (848 aug)  c2: 873 (0 aug)  c3: 886 (0 aug)  c4: 826 (826 aug)  c5: 835 (835 aug)
+Epoch 9/100 | train_loss: 0.4922 | val_loss: 0.3817 | val_mae: 0.7427
+  Classes seen: c1: 882 (882 aug)  c2: 879 (0 aug)  c3: 815 (0 aug)  c4: 892 (892 aug)  c5: 800 (800 aug)
+Epoch 10/100 | train_loss: 0.4915 | val_loss: 0.3954 | val_mae: 0.7600
+  Classes seen: c1: 839 (839 aug)  c2: 821 (0 aug)  c3: 889 (0 aug)  c4: 905 (905 aug)  c5: 814 (814 aug)
+Epoch 11/100 | train_loss: 0.5003 | val_loss: 0.3923 | val_mae: 0.7553
+  Classes seen: c1: 888 (888 aug)  c2: 812 (0 aug)  c3: 823 (0 aug)  c4: 885 (885 aug)  c5: 860 (860 aug)
+Epoch 12/100 | train_loss: 0.4766 | val_loss: 0.3838 | val_mae: 0.7443
+  Classes seen: c1: 800 (800 aug)  c2: 912 (0 aug)  c3: 849 (0 aug)  c4: 852 (852 aug)  c5: 855 (855 aug)
+Epoch 13/100 | train_loss: 0.4784 | val_loss: 0.4116 | val_mae: 0.7718
+  Classes seen: c1: 828 (828 aug)  c2: 846 (0 aug)  c3: 860 (0 aug)  c4: 866 (866 aug)  c5: 868 (868 aug)
+Epoch 14/100 | train_loss: 0.4978 | val_loss: 0.3973 | val_mae: 0.7620
+  Classes seen: c1: 857 (857 aug)  c2: 852 (0 aug)  c3: 830 (0 aug)  c4: 856 (856 aug)  c5: 873 (873 aug)
+Epoch 15/100 | train_loss: 0.4844 | val_loss: 0.3877 | val_mae: 0.7469
+  Classes seen: c1: 820 (820 aug)  c2: 853 (0 aug)  c3: 825 (0 aug)  c4: 885 (885 aug)  c5: 885 (885 aug)
+Epoch 16/100 | train_loss: 0.4760 | val_loss: 0.3788 | val_mae: 0.7366
+  Classes seen: c1: 895 (895 aug)  c2: 875 (0 aug)  c3: 855 (0 aug)  c4: 812 (812 aug)  c5: 831 (831 aug)
+  → Saved best model (val_loss: 0.3788)
+Epoch 17/100 | train_loss: 0.4802 | val_loss: 0.3950 | val_mae: 0.7554
+  Classes seen: c1: 835 (835 aug)  c2: 846 (0 aug)  c3: 847 (0 aug)  c4: 858 (858 aug)  c5: 882 (882 aug)
+Epoch 18/100 | train_loss: 0.4813 | val_loss: 0.3957 | val_mae: 0.7595
+  Classes seen: c1: 865 (865 aug)  c2: 838 (0 aug)  c3: 863 (0 aug)  c4: 862 (862 aug)  c5: 840 (840 aug)
+Epoch 19/100 | train_loss: 0.4797 | val_loss: 0.3992 | val_mae: 0.7620
+  Classes seen: c1: 862 (862 aug)  c2: 864 (0 aug)  c3: 839 (0 aug)  c4: 865 (865 aug)  c5: 838 (838 aug)
+Epoch 20/100 | train_loss: 0.4694 | val_loss: 0.4013 | val_mae: 0.7627
+  Classes seen: c1: 813 (813 aug)  c2: 857 (0 aug)  c3: 855 (0 aug)  c4: 847 (847 aug)  c5: 896 (896 aug)
+Epoch 21/100 | train_loss: 0.4740 | val_loss: 0.3901 | val_mae: 0.7499
+  Classes seen: c1: 851 (851 aug)  c2: 848 (0 aug)  c3: 858 (0 aug)  c4: 811 (811 aug)  c5: 900 (900 aug)
+Epoch 22/100 | train_loss: 0.4643 | val_loss: 0.3930 | val_mae: 0.7543
+  Classes seen: c1: 830 (830 aug)  c2: 890 (0 aug)  c3: 832 (0 aug)  c4: 874 (874 aug)  c5: 842 (842 aug)
+Epoch 23/100 | train_loss: 0.4895 | val_loss: 0.3936 | val_mae: 0.7548
+  Classes seen: c1: 859 (859 aug)  c2: 864 (0 aug)  c3: 823 (0 aug)  c4: 856 (856 aug)  c5: 866 (866 aug)
+Epoch 24/100 | train_loss: 0.4676 | val_loss: 0.3942 | val_mae: 0.7580
+  Classes seen: c1: 825 (825 aug)  c2: 869 (0 aug)  c3: 835 (0 aug)  c4: 874 (874 aug)  c5: 865 (865 aug)
+Epoch 25/100 | train_loss: 0.4617 | val_loss: 0.3889 | val_mae: 0.7509
+  Classes seen: c1: 845 (845 aug)  c2: 832 (0 aug)  c3: 891 (0 aug)  c4: 897 (897 aug)  c5: 803 (803 aug)
+Epoch 26/100 | train_loss: 0.4498 | val_loss: 0.3890 | val_mae: 0.7502
+  Classes seen: c1: 835 (835 aug)  c2: 880 (0 aug)  c3: 843 (0 aug)  c4: 901 (901 aug)  c5: 809 (809 aug)
+Epoch 27/100 | train_loss: 0.4682 | val_loss: 0.3972 | val_mae: 0.7604
+  Classes seen: c1: 826 (826 aug)  c2: 840 (0 aug)  c3: 876 (0 aug)  c4: 884 (884 aug)  c5: 842 (842 aug)
+Epoch 28/100 | train_loss: 0.4775 | val_loss: 0.3883 | val_mae: 0.7496
+  Classes seen: c1: 857 (857 aug)  c2: 858 (0 aug)  c3: 860 (0 aug)  c4: 812 (812 aug)  c5: 881 (881 aug)
+Epoch 29/100 | train_loss: 0.4770 | val_loss: 0.3918 | val_mae: 0.7535
+  Classes seen: c1: 858 (858 aug)  c2: 837 (0 aug)  c3: 895 (0 aug)  c4: 866 (866 aug)  c5: 812 (812 aug)
+Epoch 30/100 | train_loss: 0.4640 | val_loss: 0.3903 | val_mae: 0.7516
+  Classes seen: c1: 845 (845 aug)  c2: 863 (0 aug)  c3: 848 (0 aug)  c4: 850 (850 aug)  c5: 862 (862 aug)
+Epoch 31/100 | train_loss: 0.4758 | val_loss: 0.3882 | val_mae: 0.7488
+  Classes seen: c1: 892 (892 aug)  c2: 905 (0 aug)  c3: 842 (0 aug)  c4: 811 (811 aug)  c5: 818 (818 aug)
+Epoch 32/100 | train_loss: 0.4745 | val_loss: 0.3911 | val_mae: 0.7524
+  Classes seen: c1: 843 (843 aug)  c2: 865 (0 aug)  c3: 886 (0 aug)  c4: 877 (877 aug)  c5: 797 (797 aug)
+Epoch 33/100 | train_loss: 0.4708 | val_loss: 0.3898 | val_mae: 0.7507
+  Classes seen: c1: 901 (901 aug)  c2: 825 (0 aug)  c3: 871 (0 aug)  c4: 828 (828 aug)  c5: 843 (843 aug)
+Epoch 34/100 | train_loss: 0.4771 | val_loss: 0.3894 | val_mae: 0.7502
+  Classes seen: c1: 870 (870 aug)  c2: 839 (0 aug)  c3: 813 (0 aug)  c4: 889 (889 aug)  c5: 857 (857 aug)
+Epoch 35/100 | train_loss: 0.4743 | val_loss: 0.3877 | val_mae: 0.7482
+  Classes seen: c1: 900 (900 aug)  c2: 849 (0 aug)  c3: 837 (0 aug)  c4: 806 (806 aug)  c5: 876 (876 aug)
+Epoch 36/100 | train_loss: 0.4776 | val_loss: 0.3907 | val_mae: 0.7515
+  Classes seen: c1: 858 (858 aug)  c2: 828 (0 aug)  c3: 848 (0 aug)  c4: 868 (868 aug)  c5: 866 (866 aug)
+Epoch 37/100 | train_loss: 0.4800 | val_loss: 0.3913 | val_mae: 0.7521
+  Classes seen: c1: 860 (860 aug)  c2: 829 (0 aug)  c3: 856 (0 aug)  c4: 837 (837 aug)  c5: 886 (886 aug)
+Epoch 38/100 | train_loss: 0.4675 | val_loss: 0.3919 | val_mae: 0.7531
+  Classes seen: c1: 841 (841 aug)  c2: 894 (0 aug)  c3: 842 (0 aug)  c4: 829 (829 aug)  c5: 862 (862 aug)
+Epoch 39/100 | train_loss: 0.4759 | val_loss: 0.3920 | val_mae: 0.7532
+  Classes seen: c1: 829 (829 aug)  c2: 834 (0 aug)  c3: 886 (0 aug)  c4: 884 (884 aug)  c5: 835 (835 aug)
+Epoch 40/100 | train_loss: 0.4737 | val_loss: 0.3930 | val_mae: 0.7545
+  Classes seen: c1: 863 (863 aug)  c2: 810 (0 aug)  c3: 834 (0 aug)  c4: 886 (886 aug)  c5: 875 (875 aug)
+Epoch 41/100 | train_loss: 0.4670 | val_loss: 0.3931 | val_mae: 0.7546
+  Classes seen: c1: 828 (828 aug)  c2: 903 (0 aug)  c3: 850 (0 aug)  c4: 838 (838 aug)  c5: 849 (849 aug)
+Epoch 42/100 | train_loss: 0.4655 | val_loss: 0.3930 | val_mae: 0.7545
+  Classes seen: c1: 840 (840 aug)  c2: 805 (0 aug)  c3: 898 (0 aug)  c4: 856 (856 aug)  c5: 869 (869 aug)
+Epoch 43/100 | train_loss: 0.4755 | val_loss: 0.3931 | val_mae: 0.7547
+  Classes seen: c1: 879 (879 aug)  c2: 812 (0 aug)  c3: 829 (0 aug)  c4: 868 (868 aug)  c5: 880 (880 aug)
+Epoch 44/100 | train_loss: 0.4841 | val_loss: 0.3941 | val_mae: 0.7560
+  Classes seen: c1: 811 (811 aug)  c2: 866 (0 aug)  c3: 891 (0 aug)  c4: 845 (845 aug)  c5: 855 (855 aug)
+Epoch 45/100 | train_loss: 0.4532 | val_loss: 0.3946 | val_mae: 0.7568
+  Classes seen: c1: 805 (805 aug)  c2: 845 (0 aug)  c3: 882 (0 aug)  c4: 875 (875 aug)  c5: 861 (861 aug)
+Epoch 46/100 | train_loss: 0.4720 | val_loss: 0.3942 | val_mae: 0.7563
+  Classes seen: c1: 835 (835 aug)  c2: 845 (0 aug)  c3: 882 (0 aug)  c4: 862 (862 aug)  c5: 844 (844 aug)
+Epoch 47/100 | train_loss: 0.4742 | val_loss: 0.3938 | val_mae: 0.7556
+  Classes seen: c1: 844 (844 aug)  c2: 856 (0 aug)  c3: 854 (0 aug)  c4: 808 (808 aug)  c5: 906 (906 aug)
+Epoch 48/100 | train_loss: 0.4721 | val_loss: 0.3928 | val_mae: 0.7544
+  Classes seen: c1: 870 (870 aug)  c2: 832 (0 aug)  c3: 827 (0 aug)  c4: 895 (895 aug)  c5: 844 (844 aug)
+Epoch 49/100 | train_loss: 0.4693 | val_loss: 0.3927 | val_mae: 0.7542
+  Classes seen: c1: 875 (875 aug)  c2: 857 (0 aug)  c3: 841 (0 aug)  c4: 826 (826 aug)  c5: 869 (869 aug)
+Epoch 50/100 | train_loss: 0.4896 | val_loss: 0.3922 | val_mae: 0.7536
+  Classes seen: c1: 945 (945 aug)  c2: 821 (0 aug)  c3: 838 (0 aug)  c4: 855 (855 aug)  c5: 809 (809 aug)
+Epoch 51/100 | train_loss: 0.4791 | val_loss: 0.3920 | val_mae: 0.7533
+  Classes seen: c1: 855 (855 aug)  c2: 861 (0 aug)  c3: 849 (0 aug)  c4: 868 (868 aug)  c5: 835 (835 aug)
+Epoch 52/100 | train_loss: 0.4743 | val_loss: 0.3916 | val_mae: 0.7529
+  Classes seen: c1: 853 (853 aug)  c2: 894 (0 aug)  c3: 856 (0 aug)  c4: 825 (825 aug)  c5: 840 (840 aug)
+Epoch 53/100 | train_loss: 0.4653 | val_loss: 0.3916 | val_mae: 0.7529
+  Classes seen: c1: 860 (860 aug)  c2: 857 (0 aug)  c3: 831 (0 aug)  c4: 848 (848 aug)  c5: 872 (872 aug)
+Epoch 54/100 | train_loss: 0.4603 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 834 (834 aug)  c2: 860 (0 aug)  c3: 898 (0 aug)  c4: 847 (847 aug)  c5: 829 (829 aug)
+Epoch 55/100 | train_loss: 0.4820 | val_loss: 0.3914 | val_mae: 0.7527
+  Classes seen: c1: 846 (846 aug)  c2: 855 (0 aug)  c3: 834 (0 aug)  c4: 879 (879 aug)  c5: 854 (854 aug)
+Epoch 56/100 | train_loss: 0.4844 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 844 (844 aug)  c2: 850 (0 aug)  c3: 836 (0 aug)  c4: 873 (873 aug)  c5: 865 (865 aug)
+Epoch 57/100 | train_loss: 0.4614 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 863 (863 aug)  c2: 837 (0 aug)  c3: 870 (0 aug)  c4: 821 (821 aug)  c5: 877 (877 aug)
+Epoch 58/100 | train_loss: 0.4770 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 853 (853 aug)  c2: 830 (0 aug)  c3: 830 (0 aug)  c4: 881 (881 aug)  c5: 874 (874 aug)
+Epoch 59/100 | train_loss: 0.4797 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 843 (843 aug)  c2: 873 (0 aug)  c3: 838 (0 aug)  c4: 866 (866 aug)  c5: 848 (848 aug)
+Epoch 60/100 | train_loss: 0.4721 | val_loss: 0.3916 | val_mae: 0.7528
+  Classes seen: c1: 832 (832 aug)  c2: 876 (0 aug)  c3: 857 (0 aug)  c4: 854 (854 aug)  c5: 849 (849 aug)
+Epoch 61/100 | train_loss: 0.4676 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 842 (842 aug)  c2: 887 (0 aug)  c3: 853 (0 aug)  c4: 876 (876 aug)  c5: 810 (810 aug)
+Epoch 62/100 | train_loss: 0.4726 | val_loss: 0.3916 | val_mae: 0.7528
+  Classes seen: c1: 852 (852 aug)  c2: 867 (0 aug)  c3: 833 (0 aug)  c4: 850 (850 aug)  c5: 866 (866 aug)
+Epoch 63/100 | train_loss: 0.4849 | val_loss: 0.3916 | val_mae: 0.7528
+  Classes seen: c1: 874 (874 aug)  c2: 836 (0 aug)  c3: 822 (0 aug)  c4: 888 (888 aug)  c5: 848 (848 aug)
+Epoch 64/100 | train_loss: 0.4720 | val_loss: 0.3916 | val_mae: 0.7528
+  Classes seen: c1: 841 (841 aug)  c2: 857 (0 aug)  c3: 837 (0 aug)  c4: 898 (898 aug)  c5: 835 (835 aug)
+Epoch 65/100 | train_loss: 0.4582 | val_loss: 0.3916 | val_mae: 0.7528
+  Classes seen: c1: 855 (855 aug)  c2: 847 (0 aug)  c3: 886 (0 aug)  c4: 814 (814 aug)  c5: 866 (866 aug)
+Epoch 66/100 | train_loss: 0.4708 | val_loss: 0.3916 | val_mae: 0.7528
+  Classes seen: c1: 833 (833 aug)  c2: 808 (0 aug)  c3: 878 (0 aug)  c4: 860 (860 aug)  c5: 889 (889 aug)
+Epoch 67/100 | train_loss: 0.4613 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 856 (856 aug)  c2: 865 (0 aug)  c3: 875 (0 aug)  c4: 840 (840 aug)  c5: 832 (832 aug)
+Epoch 68/100 | train_loss: 0.4693 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 871 (871 aug)  c2: 875 (0 aug)  c3: 833 (0 aug)  c4: 845 (845 aug)  c5: 844 (844 aug)
+Epoch 69/100 | train_loss: 0.4683 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 854 (854 aug)  c2: 817 (0 aug)  c3: 851 (0 aug)  c4: 909 (909 aug)  c5: 837 (837 aug)
+Epoch 70/100 | train_loss: 0.4580 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 852 (852 aug)  c2: 876 (0 aug)  c3: 826 (0 aug)  c4: 827 (827 aug)  c5: 887 (887 aug)
+Epoch 71/100 | train_loss: 0.4604 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 881 (881 aug)  c2: 833 (0 aug)  c3: 864 (0 aug)  c4: 813 (813 aug)  c5: 877 (877 aug)
+Epoch 72/100 | train_loss: 0.4675 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 852 (852 aug)  c2: 857 (0 aug)  c3: 863 (0 aug)  c4: 841 (841 aug)  c5: 855 (855 aug)
+Epoch 73/100 | train_loss: 0.4576 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 835 (835 aug)  c2: 825 (0 aug)  c3: 888 (0 aug)  c4: 855 (855 aug)  c5: 865 (865 aug)
+Epoch 74/100 | train_loss: 0.4691 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 843 (843 aug)  c2: 858 (0 aug)  c3: 870 (0 aug)  c4: 856 (856 aug)  c5: 841 (841 aug)
+Epoch 75/100 | train_loss: 0.4810 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 867 (867 aug)  c2: 879 (0 aug)  c3: 828 (0 aug)  c4: 850 (850 aug)  c5: 844 (844 aug)
+Epoch 76/100 | train_loss: 0.4703 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 862 (862 aug)  c2: 896 (0 aug)  c3: 803 (0 aug)  c4: 862 (862 aug)  c5: 845 (845 aug)
+Epoch 77/100 | train_loss: 0.4705 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 796 (796 aug)  c2: 872 (0 aug)  c3: 857 (0 aug)  c4: 883 (883 aug)  c5: 860 (860 aug)
+Epoch 78/100 | train_loss: 0.4708 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 860 (860 aug)  c2: 856 (0 aug)  c3: 828 (0 aug)  c4: 876 (876 aug)  c5: 848 (848 aug)
+Epoch 79/100 | train_loss: 0.4711 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 857 (857 aug)  c2: 881 (0 aug)  c3: 835 (0 aug)  c4: 824 (824 aug)  c5: 871 (871 aug)
+Epoch 80/100 | train_loss: 0.4623 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 855 (855 aug)  c2: 881 (0 aug)  c3: 842 (0 aug)  c4: 855 (855 aug)  c5: 835 (835 aug)
+Epoch 81/100 | train_loss: 0.4717 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 868 (868 aug)  c2: 834 (0 aug)  c3: 860 (0 aug)  c4: 852 (852 aug)  c5: 854 (854 aug)
+Epoch 82/100 | train_loss: 0.4653 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 877 (877 aug)  c2: 870 (0 aug)  c3: 862 (0 aug)  c4: 827 (827 aug)  c5: 832 (832 aug)
+Epoch 83/100 | train_loss: 0.4781 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 829 (829 aug)  c2: 847 (0 aug)  c3: 809 (0 aug)  c4: 877 (877 aug)  c5: 906 (906 aug)
+Epoch 84/100 | train_loss: 0.4821 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 926 (926 aug)  c2: 857 (0 aug)  c3: 836 (0 aug)  c4: 832 (832 aug)  c5: 817 (817 aug)
+Epoch 85/100 | train_loss: 0.4782 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 822 (822 aug)  c2: 839 (0 aug)  c3: 852 (0 aug)  c4: 890 (890 aug)  c5: 865 (865 aug)
+Epoch 86/100 | train_loss: 0.4686 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 831 (831 aug)  c2: 901 (0 aug)  c3: 811 (0 aug)  c4: 848 (848 aug)  c5: 877 (877 aug)
+Epoch 87/100 | train_loss: 0.4708 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 847 (847 aug)  c2: 841 (0 aug)  c3: 851 (0 aug)  c4: 879 (879 aug)  c5: 850 (850 aug)
+Epoch 88/100 | train_loss: 0.4779 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 865 (865 aug)  c2: 898 (0 aug)  c3: 797 (0 aug)  c4: 866 (866 aug)  c5: 842 (842 aug)
+Epoch 89/100 | train_loss: 0.4726 | val_loss: 0.3915 | val_mae: 0.7528
+  Classes seen: c1: 837 (837 aug)  c2: 880 (0 aug)  c3: 834 (0 aug)  c4: 889 (889 aug)  c5: 828 (828 aug)
+Epoch 90/100 | train_loss: 0.4799 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 884 (884 aug)  c2: 873 (0 aug)  c3: 832 (0 aug)  c4: 828 (828 aug)  c5: 851 (851 aug)
+Epoch 91/100 | train_loss: 0.4730 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 886 (886 aug)  c2: 802 (0 aug)  c3: 844 (0 aug)  c4: 882 (882 aug)  c5: 854 (854 aug)
+Epoch 92/100 | train_loss: 0.4772 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 905 (905 aug)  c2: 822 (0 aug)  c3: 839 (0 aug)  c4: 852 (852 aug)  c5: 850 (850 aug)
+Epoch 93/100 | train_loss: 0.4608 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 813 (813 aug)  c2: 855 (0 aug)  c3: 888 (0 aug)  c4: 866 (866 aug)  c5: 846 (846 aug)
+Epoch 94/100 | train_loss: 0.4789 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 860 (860 aug)  c2: 788 (0 aug)  c3: 877 (0 aug)  c4: 879 (879 aug)  c5: 864 (864 aug)
+Epoch 95/100 | train_loss: 0.4689 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 889 (889 aug)  c2: 884 (0 aug)  c3: 880 (0 aug)  c4: 790 (790 aug)  c5: 825 (825 aug)
+Epoch 96/100 | train_loss: 0.4689 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 909 (909 aug)  c2: 858 (0 aug)  c3: 839 (0 aug)  c4: 856 (856 aug)  c5: 806 (806 aug)
+Epoch 97/100 | train_loss: 0.4695 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 857 (857 aug)  c2: 855 (0 aug)  c3: 830 (0 aug)  c4: 860 (860 aug)  c5: 866 (866 aug)
+Epoch 98/100 | train_loss: 0.4725 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 868 (868 aug)  c2: 864 (0 aug)  c3: 847 (0 aug)  c4: 844 (844 aug)  c5: 845 (845 aug)
+Epoch 99/100 | train_loss: 0.4775 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 858 (858 aug)  c2: 870 (0 aug)  c3: 841 (0 aug)  c4: 864 (864 aug)  c5: 835 (835 aug)
+Epoch 100/100 | train_loss: 0.4688 | val_loss: 0.3915 | val_mae: 0.7527
+  Classes seen: c1: 844 (844 aug)  c2: 802 (0 aug)  c3: 873 (0 aug)  c4: 864 (864 aug)  c5: 885 (885 aug)
+
+Saved per-epoch class counts to training_class_counts.csv
+
+Total instances seen during training:
+  Class        Seen  Augmented
+  ----------------------------
+  1           85546      85546
+  2           85386          0
+  3           85025          0
+  4           85636      85636
+  5           85207      85207
+
+============================================================
+Training completed! Evaluating on test sets...
+============================================================
+
+Loaded best model from epoch 16
+
+Evaluating on val set...
+  loss: 0.3737  mae: 0.7366
+
+VAL confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |     1    27    10     1     0
+        2 |    18    90    89    15     1
+        3 |     5    74   111    23     8
+        4 |     0    16    24    10     2
+        5 |     0     0     4     1     3
+
+VAL confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |   136    99    17
+        2 |    79   111    31
+        3 |    16    28    16
+
+Evaluating on test set...
+  loss: 0.3645  mae: 0.7240
+
+TEST confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |     2    20    15     1     0
+        2 |     9    96    91    18     0
+        3 |    11    68   116    24     3
+        4 |     0    11    26    12     3
+        5 |     0     1     5     2     0
+
+TEST confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |   127   106    19
+        2 |    79   116    27
+        3 |    12    31    17
+
+Saved metrics_5class.csv and metrics_3class.csv to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260308_093837_CET
+Saved confusion matrix CSVs to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260308_093837_CET
+
+============================================================
+Metrics Summary (5-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3  precision_c4  recall_c4  f1_c4  precision_c5  recall_c5  f1_c5    mae   loss  range_0_pct  range_1_pct  range_2_pct  range_3_pct  range_4_pct
+    val             0.3035 0.2884      0.2665        0.0417     0.0256 0.0317        0.4348     0.4225 0.4286        0.4664     0.5023 0.4837        0.2000     0.1923 0.1961        0.2143     0.3750 0.2727 0.7366 0.3737       0.4034       0.4841       0.1088       0.0038       0.0000
+   test             0.2509 0.2375      0.2310        0.0909     0.0526 0.0667        0.4898     0.4486 0.4683        0.4585     0.5225 0.4884        0.2105     0.2308 0.2202        0.0000     0.0000 0.0000 0.7240 0.3645       0.4232       0.4551       0.1180       0.0037       0.0000
+
+============================================================
+Metrics Summary (3-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3    mae   loss  range_0_pct  range_1_pct  range_2_pct
+    val             0.4362 0.2418      0.2378        0.5887     0.5397 0.5631        0.4664     0.5023 0.4837        0.2500     0.2667 0.2581 0.7366 0.3737       0.4934       0.4447       0.0619
+   test             0.4366 0.2379      0.2283        0.5826     0.5040 0.5404        0.4585     0.5225 0.4884        0.2698     0.2833 0.2764 0.7240 0.3645       0.4869       0.4551       0.0581

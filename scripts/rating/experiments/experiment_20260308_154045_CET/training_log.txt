@@ -1,0 +1,188 @@
+Using device: cuda
+Experiment folder: D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260308_154045_CET
+
+--- Configuration ---
+BACKBONE              : densenet121  (blocks unfrozen: 1)
+USE_CLASS_WEIGHTS     : False
+USE_OVERSAMPLING      : False
+USE_CHANNEL_ATTENTION : False
+EPOCHS=30  BATCH_SIZE=32  LR=0.0001  WD=0.01  SMOOTHL1_BETA=1
+USE_BONN=True  BONN_MODE=amae  BONN_SIGMA=0.388
+Augmented classes           : None
+
+Unfrozen modules     : ['features', 'classifier']
+Trainable parameters : 6,954,881
+
+BONN class counts  : {1: 310, 2: 1708, 3: 1773, 4: 414, 5: 63}
+BONN init thresholds: ['-0.750', '-0.250', '0.250', '0.750']
+
+Starting training for 30 epochs...
+Epoch 1/30 | train_loss: -0.0298 | val_loss: -0.0314 | val_mae: 1.0075
+  BONN thresholds: ['-0.746', '-0.243', '0.261', '0.766']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+  → Saved best model (val_loss: -0.0314)
+Epoch 2/30 | train_loss: -0.0423 | val_loss: -0.0357 | val_mae: 1.0094
+  BONN thresholds: ['-0.741', '-0.233', '0.275', '0.785']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+  → Saved best model (val_loss: -0.0357)
+Epoch 3/30 | train_loss: -0.0436 | val_loss: -0.0392 | val_mae: 0.9944
+  BONN thresholds: ['-0.734', '-0.223', '0.291', '0.805']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+  → Saved best model (val_loss: -0.0392)
+Epoch 4/30 | train_loss: -0.0462 | val_loss: -0.0450 | val_mae: 0.9250
+  BONN thresholds: ['-0.728', '-0.213', '0.305', '0.824']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+  → Saved best model (val_loss: -0.0450)
+Epoch 5/30 | train_loss: -0.0461 | val_loss: -0.0395 | val_mae: 0.9962
+  BONN thresholds: ['-0.722', '-0.203', '0.320', '0.844']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 6/30 | train_loss: -0.0462 | val_loss: -0.0394 | val_mae: 0.8180
+  BONN thresholds: ['-0.716', '-0.193', '0.334', '0.863']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 7/30 | train_loss: -0.0470 | val_loss: -0.0409 | val_mae: 0.8218
+  BONN thresholds: ['-0.710', '-0.183', '0.348', '0.882']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 8/30 | train_loss: -0.0438 | val_loss: -0.0343 | val_mae: 0.9268
+  BONN thresholds: ['-0.705', '-0.174', '0.361', '0.900']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 9/30 | train_loss: -0.0503 | val_loss: -0.0416 | val_mae: 0.7298
+  BONN thresholds: ['-0.701', '-0.169', '0.369', '0.910']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 10/30 | train_loss: -0.0517 | val_loss: -0.0427 | val_mae: 0.7955
+  BONN thresholds: ['-0.698', '-0.164', '0.376', '0.920']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 11/30 | train_loss: -0.0537 | val_loss: -0.0426 | val_mae: 0.7129
+  BONN thresholds: ['-0.695', '-0.159', '0.384', '0.930']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 12/30 | train_loss: -0.0543 | val_loss: -0.0446 | val_mae: 0.7542
+  BONN thresholds: ['-0.691', '-0.153', '0.391', '0.940']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 13/30 | train_loss: -0.0557 | val_loss: -0.0380 | val_mae: 0.8349
+  BONN thresholds: ['-0.690', '-0.151', '0.395', '0.945']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 14/30 | train_loss: -0.0568 | val_loss: -0.0457 | val_mae: 0.6473
+  BONN thresholds: ['-0.688', '-0.148', '0.399', '0.950']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+  → Saved best model (val_loss: -0.0457)
+Epoch 15/30 | train_loss: -0.0579 | val_loss: -0.0449 | val_mae: 0.6435
+  BONN thresholds: ['-0.687', '-0.146', '0.403', '0.955']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 16/30 | train_loss: -0.0580 | val_loss: -0.0453 | val_mae: 0.6435
+  BONN thresholds: ['-0.685', '-0.143', '0.407', '0.961']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 17/30 | train_loss: -0.0584 | val_loss: -0.0469 | val_mae: 0.6548
+  BONN thresholds: ['-0.683', '-0.140', '0.411', '0.966']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+  → Saved best model (val_loss: -0.0469)
+Epoch 18/30 | train_loss: -0.0587 | val_loss: -0.0438 | val_mae: 0.6567
+  BONN thresholds: ['-0.681', '-0.137', '0.415', '0.972']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 19/30 | train_loss: -0.0588 | val_loss: -0.0429 | val_mae: 0.6604
+  BONN thresholds: ['-0.680', '-0.134', '0.419', '0.977']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 20/30 | train_loss: -0.0591 | val_loss: -0.0431 | val_mae: 0.6285
+  BONN thresholds: ['-0.678', '-0.131', '0.424', '0.983']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 21/30 | train_loss: -0.0576 | val_loss: -0.0451 | val_mae: 0.7280
+  BONN thresholds: ['-0.676', '-0.128', '0.428', '0.988']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 22/30 | train_loss: -0.0589 | val_loss: -0.0427 | val_mae: 0.6379
+  BONN thresholds: ['-0.675', '-0.127', '0.430', '0.991']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 23/30 | train_loss: -0.0600 | val_loss: -0.0436 | val_mae: 0.6079
+  BONN thresholds: ['-0.674', '-0.125', '0.432', '0.994']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 24/30 | train_loss: -0.0606 | val_loss: -0.0436 | val_mae: 0.6004
+  BONN thresholds: ['-0.673', '-0.124', '0.434', '0.997']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 25/30 | train_loss: -0.0609 | val_loss: -0.0440 | val_mae: 0.6210
+  BONN thresholds: ['-0.672', '-0.122', '0.436', '0.999']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 26/30 | train_loss: -0.0611 | val_loss: -0.0427 | val_mae: 0.5872
+  BONN thresholds: ['-0.672', '-0.122', '0.437', '1.001']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 27/30 | train_loss: -0.0614 | val_loss: -0.0438 | val_mae: 0.6060
+  BONN thresholds: ['-0.672', '-0.121', '0.438', '1.002']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 28/30 | train_loss: -0.0612 | val_loss: -0.0428 | val_mae: 0.6210
+  BONN thresholds: ['-0.671', '-0.120', '0.440', '1.004']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 29/30 | train_loss: -0.0615 | val_loss: -0.0435 | val_mae: 0.5779
+  BONN thresholds: ['-0.671', '-0.119', '0.441', '1.005']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+Epoch 30/30 | train_loss: -0.0618 | val_loss: -0.0428 | val_mae: 0.6191
+  BONN thresholds: ['-0.670', '-0.119', '0.441', '1.006']
+  Classes seen: c1: 310 (0 aug)  c2: 1708 (0 aug)  c3: 1773 (0 aug)  c4: 414 (0 aug)  c5: 63 (0 aug)
+
+Saved per-epoch class counts to training_class_counts.csv
+
+Total instances seen during training:
+  Class        Seen  Augmented
+  ----------------------------
+  1            9300          0
+  2           51240          0
+  3           53190          0
+  4           12420          0
+  5            1890          0
+
+============================================================
+Training completed! Evaluating on test sets...
+============================================================
+  Restored BONN thresholds: ['-0.683', '-0.140', '0.411', '0.966']
+
+Loaded best model from epoch 17
+
+Evaluating on val set...
+  loss: -0.0469  mae: 0.6548
+
+VAL confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |    25    11     3     0     0
+        2 |    51    53    95    12     2
+        3 |    13    29   135    42     2
+        4 |     1    10    25    13     3
+        5 |     0     0     1     2     5
+
+VAL confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |   140    98    14
+        2 |    42   135    44
+        3 |    11    26    23
+
+Evaluating on test set...
+  loss: -0.0403  mae: 0.7041
+
+TEST confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |    16    12     9     1     0
+        2 |    59    64    79    10     2
+        3 |    20    42   120    35     5
+        4 |     1     4    21    14    12
+        5 |     0     0     3     2     3
+
+TEST confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |   151    88    13
+        2 |    62   120    40
+        3 |     5    24    31
+
+Saved metrics_5class.csv and metrics_3class.csv to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260308_154045_CET
+Saved confusion matrix CSVs to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260308_154045_CET
+
+============================================================
+Metrics Summary (5-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3  precision_c4  recall_c4  f1_c4  precision_c5  recall_c5  f1_c5    mae    loss  range_0_pct  range_1_pct  range_2_pct  range_3_pct  range_4_pct
+    val             0.4751 0.4863      0.4705        0.2778     0.6410 0.3876        0.5146     0.2488 0.3354        0.5212     0.6109 0.5625        0.1884     0.2500 0.2149        0.4167     0.6250 0.5000 0.6548 -0.0469       0.4334       0.4841       0.0769       0.0056       0.0000
+   test             0.3810 0.4620      0.4623        0.1667     0.4211 0.2388        0.5246     0.2991 0.3810        0.5172     0.5405 0.5286        0.2258     0.2692 0.2456        0.1364     0.3750 0.2000 0.7041 -0.0403       0.4064       0.4906       0.0955       0.0075       0.0000
+
+============================================================
+Metrics Summary (3-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3    mae    loss  range_0_pct  range_1_pct  range_2_pct
+    val             0.5166 0.3865      0.4073        0.7254     0.5556 0.6292        0.5212     0.6109 0.5625        0.2840     0.3833 0.3262 0.6548 -0.0469       0.5591       0.3940       0.0469
+   test             0.5521 0.4475      0.4407        0.6927     0.5992 0.6426        0.5172     0.5405 0.5286        0.3690     0.5167 0.4306 0.7041 -0.0403       0.5655       0.4007       0.0337

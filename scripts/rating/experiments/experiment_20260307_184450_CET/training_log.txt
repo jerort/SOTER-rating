@@ -1,0 +1,158 @@
+Using device: cuda
+Experiment folder: D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260307_184450_CET
+
+--- Configuration ---
+BACKBONE              : vit_l_16  (blocks unfrozen: 0)
+USE_CLASS_WEIGHTS     : False
+USE_OVERSAMPLING      : True
+USE_CHANNEL_ATTENTION : False
+EPOCHS=30  BATCH_SIZE=32  LR=0.0001  WD=0.1  SMOOTHL1_BETA=1
+USE_BONN=False  BONN_MODE=amae  BONN_SIGMA=0.388
+Augmented classes           : [1, 4, 5]
+Oversampling: WeightedRandomSampler active.
+
+Unfrozen modules     : ['fc']
+Trainable parameters : 1,025
+
+Starting training for 30 epochs...
+Epoch 1/30 | train_loss: 1.0690 | val_loss: 0.5987 | val_mae: 0.9739
+  Classes seen: c1: 862 (862 aug)  c2: 828 (0 aug)  c3: 854 (0 aug)  c4: 888 (888 aug)  c5: 836 (836 aug)
+  → Saved best model (val_loss: 0.5987)
+Epoch 2/30 | train_loss: 0.7631 | val_loss: 0.5163 | val_mae: 0.8983
+  Classes seen: c1: 851 (851 aug)  c2: 847 (0 aug)  c3: 891 (0 aug)  c4: 850 (850 aug)  c5: 829 (829 aug)
+  → Saved best model (val_loss: 0.5163)
+Epoch 3/30 | train_loss: 0.6832 | val_loss: 0.4853 | val_mae: 0.8634
+  Classes seen: c1: 854 (854 aug)  c2: 883 (0 aug)  c3: 827 (0 aug)  c4: 848 (848 aug)  c5: 856 (856 aug)
+  → Saved best model (val_loss: 0.4853)
+Epoch 4/30 | train_loss: 0.6561 | val_loss: 0.4796 | val_mae: 0.8618
+  Classes seen: c1: 828 (828 aug)  c2: 858 (0 aug)  c3: 850 (0 aug)  c4: 861 (861 aug)  c5: 871 (871 aug)
+  → Saved best model (val_loss: 0.4796)
+Epoch 5/30 | train_loss: 0.6246 | val_loss: 0.4860 | val_mae: 0.8715
+  Classes seen: c1: 854 (854 aug)  c2: 846 (0 aug)  c3: 826 (0 aug)  c4: 854 (854 aug)  c5: 888 (888 aug)
+Epoch 6/30 | train_loss: 0.5917 | val_loss: 0.5160 | val_mae: 0.9033
+  Classes seen: c1: 819 (819 aug)  c2: 830 (0 aug)  c3: 854 (0 aug)  c4: 872 (872 aug)  c5: 893 (893 aug)
+Epoch 7/30 | train_loss: 0.5797 | val_loss: 0.4825 | val_mae: 0.8624
+  Classes seen: c1: 883 (883 aug)  c2: 851 (0 aug)  c3: 836 (0 aug)  c4: 834 (834 aug)  c5: 864 (864 aug)
+Epoch 8/30 | train_loss: 0.5607 | val_loss: 0.4645 | val_mae: 0.8445
+  Classes seen: c1: 834 (834 aug)  c2: 855 (0 aug)  c3: 889 (0 aug)  c4: 855 (855 aug)  c5: 835 (835 aug)
+  → Saved best model (val_loss: 0.4645)
+Epoch 9/30 | train_loss: 0.5451 | val_loss: 0.4654 | val_mae: 0.8450
+  Classes seen: c1: 845 (845 aug)  c2: 875 (0 aug)  c3: 860 (0 aug)  c4: 878 (878 aug)  c5: 810 (810 aug)
+Epoch 10/30 | train_loss: 0.5525 | val_loss: 0.4446 | val_mae: 0.8202
+  Classes seen: c1: 829 (829 aug)  c2: 866 (0 aug)  c3: 849 (0 aug)  c4: 855 (855 aug)  c5: 869 (869 aug)
+  → Saved best model (val_loss: 0.4446)
+Epoch 11/30 | train_loss: 0.5374 | val_loss: 0.4391 | val_mae: 0.8128
+  Classes seen: c1: 861 (861 aug)  c2: 881 (0 aug)  c3: 823 (0 aug)  c4: 860 (860 aug)  c5: 843 (843 aug)
+  → Saved best model (val_loss: 0.4391)
+Epoch 12/30 | train_loss: 0.5313 | val_loss: 0.4665 | val_mae: 0.8447
+  Classes seen: c1: 860 (860 aug)  c2: 835 (0 aug)  c3: 828 (0 aug)  c4: 856 (856 aug)  c5: 889 (889 aug)
+Epoch 13/30 | train_loss: 0.5161 | val_loss: 0.4535 | val_mae: 0.8295
+  Classes seen: c1: 846 (846 aug)  c2: 863 (0 aug)  c3: 871 (0 aug)  c4: 833 (833 aug)  c5: 855 (855 aug)
+Epoch 14/30 | train_loss: 0.4989 | val_loss: 0.4572 | val_mae: 0.8334
+  Classes seen: c1: 865 (865 aug)  c2: 834 (0 aug)  c3: 871 (0 aug)  c4: 848 (848 aug)  c5: 850 (850 aug)
+Epoch 15/30 | train_loss: 0.5105 | val_loss: 0.4460 | val_mae: 0.8190
+  Classes seen: c1: 854 (854 aug)  c2: 888 (0 aug)  c3: 802 (0 aug)  c4: 849 (849 aug)  c5: 875 (875 aug)
+Epoch 16/30 | train_loss: 0.5048 | val_loss: 0.4502 | val_mae: 0.8248
+  Classes seen: c1: 874 (874 aug)  c2: 838 (0 aug)  c3: 825 (0 aug)  c4: 847 (847 aug)  c5: 884 (884 aug)
+Epoch 17/30 | train_loss: 0.5044 | val_loss: 0.4352 | val_mae: 0.8058
+  Classes seen: c1: 849 (849 aug)  c2: 810 (0 aug)  c3: 891 (0 aug)  c4: 844 (844 aug)  c5: 874 (874 aug)
+  → Saved best model (val_loss: 0.4352)
+Epoch 18/30 | train_loss: 0.5124 | val_loss: 0.4499 | val_mae: 0.8221
+  Classes seen: c1: 878 (878 aug)  c2: 814 (0 aug)  c3: 845 (0 aug)  c4: 857 (857 aug)  c5: 874 (874 aug)
+Epoch 19/30 | train_loss: 0.4889 | val_loss: 0.4414 | val_mae: 0.8119
+  Classes seen: c1: 819 (819 aug)  c2: 870 (0 aug)  c3: 844 (0 aug)  c4: 836 (836 aug)  c5: 899 (899 aug)
+Epoch 20/30 | train_loss: 0.5047 | val_loss: 0.4371 | val_mae: 0.8082
+  Classes seen: c1: 862 (862 aug)  c2: 842 (0 aug)  c3: 871 (0 aug)  c4: 829 (829 aug)  c5: 864 (864 aug)
+Epoch 21/30 | train_loss: 0.5151 | val_loss: 0.4266 | val_mae: 0.7946
+  Classes seen: c1: 877 (877 aug)  c2: 831 (0 aug)  c3: 893 (0 aug)  c4: 821 (821 aug)  c5: 846 (846 aug)
+  → Saved best model (val_loss: 0.4266)
+Epoch 22/30 | train_loss: 0.4958 | val_loss: 0.4448 | val_mae: 0.8167
+  Classes seen: c1: 886 (886 aug)  c2: 866 (0 aug)  c3: 814 (0 aug)  c4: 825 (825 aug)  c5: 877 (877 aug)
+Epoch 23/30 | train_loss: 0.4757 | val_loss: 0.4448 | val_mae: 0.8180
+  Classes seen: c1: 803 (803 aug)  c2: 880 (0 aug)  c3: 845 (0 aug)  c4: 908 (908 aug)  c5: 832 (832 aug)
+Epoch 24/30 | train_loss: 0.4938 | val_loss: 0.4411 | val_mae: 0.8147
+  Classes seen: c1: 895 (895 aug)  c2: 830 (0 aug)  c3: 850 (0 aug)  c4: 847 (847 aug)  c5: 846 (846 aug)
+Epoch 25/30 | train_loss: 0.4946 | val_loss: 0.4434 | val_mae: 0.8167
+  Classes seen: c1: 934 (934 aug)  c2: 827 (0 aug)  c3: 795 (0 aug)  c4: 843 (843 aug)  c5: 869 (869 aug)
+Epoch 26/30 | train_loss: 0.4905 | val_loss: 0.4389 | val_mae: 0.8106
+  Classes seen: c1: 831 (831 aug)  c2: 878 (0 aug)  c3: 870 (0 aug)  c4: 871 (871 aug)  c5: 818 (818 aug)
+Epoch 27/30 | train_loss: 0.4859 | val_loss: 0.4306 | val_mae: 0.7996
+  Classes seen: c1: 878 (878 aug)  c2: 848 (0 aug)  c3: 847 (0 aug)  c4: 847 (847 aug)  c5: 848 (848 aug)
+Epoch 28/30 | train_loss: 0.4768 | val_loss: 0.4318 | val_mae: 0.8018
+  Classes seen: c1: 836 (836 aug)  c2: 937 (0 aug)  c3: 852 (0 aug)  c4: 833 (833 aug)  c5: 810 (810 aug)
+Epoch 29/30 | train_loss: 0.4781 | val_loss: 0.4423 | val_mae: 0.8152
+  Classes seen: c1: 829 (829 aug)  c2: 815 (0 aug)  c3: 924 (0 aug)  c4: 852 (852 aug)  c5: 848 (848 aug)
+Epoch 30/30 | train_loss: 0.4734 | val_loss: 0.4322 | val_mae: 0.8028
+  Classes seen: c1: 839 (839 aug)  c2: 853 (0 aug)  c3: 871 (0 aug)  c4: 836 (836 aug)  c5: 869 (869 aug)
+
+Saved per-epoch class counts to training_class_counts.csv
+
+Total instances seen during training:
+  Class        Seen  Augmented
+  ----------------------------
+  1           25635      25635
+  2           25579          0
+  3           25568          0
+  4           25537      25537
+  5           25721      25721
+
+============================================================
+Training completed! Evaluating on test sets...
+============================================================
+
+Loaded best model from epoch 21
+
+Evaluating on val set...
+  loss: 0.4257  mae: 0.7946
+
+VAL confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |     3    19    16     1     0
+        2 |    16    93    78    25     1
+        3 |    12    80    93    33     3
+        4 |     0    19    19    13     1
+        5 |     0     0     3     4     1
+
+VAL confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |   131    94    27
+        2 |    92    93    36
+        3 |    19    22    19
+
+Evaluating on test set...
+  loss: 0.3901  mae: 0.7554
+
+TEST confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |     5    21    10     2     0
+        2 |    20    96    85    12     1
+        3 |    15    78    99    28     2
+        4 |     3    12    22    12     3
+        5 |     0     2     2     4     0
+
+TEST confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |   142    95    15
+        2 |    93    99    30
+        3 |    17    24    19
+
+Saved metrics_5class.csv and metrics_3class.csv to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260307_184450_CET
+Saved confusion matrix CSVs to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260307_184450_CET
+
+============================================================
+Metrics Summary (5-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3  precision_c4  recall_c4  f1_c4  precision_c5  recall_c5  f1_c5    mae   loss  range_0_pct  range_1_pct  range_2_pct  range_3_pct  range_4_pct
+    val             0.2619 0.2089      0.1824        0.0968     0.0769 0.0857        0.4408     0.4366 0.4387        0.4450     0.4208 0.4326        0.1711     0.2500 0.2031        0.1667     0.1250 0.1429 0.7946 0.4257       0.3809       0.4690       0.1463       0.0038       0.0000
+   test             0.2514 0.2492      0.2356        0.1163     0.1316 0.1235        0.4593     0.4486 0.4539        0.4541     0.4459 0.4500        0.2069     0.2308 0.2182        0.0000     0.0000 0.0000 0.7554 0.3901       0.3970       0.4888       0.0993       0.0150       0.0000
+
+============================================================
+Metrics Summary (3-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3    mae   loss  range_0_pct  range_1_pct  range_2_pct
+    val             0.4191 0.1781      0.1667        0.5413     0.5198 0.5304        0.4450     0.4208 0.4326        0.2317     0.3167 0.2676 0.7946 0.4257       0.4559       0.4578       0.0863
+   test             0.4420 0.2492      0.2300        0.5635     0.5635 0.5635        0.4541     0.4459 0.4500        0.2969     0.3167 0.3065 0.7554 0.3901       0.4869       0.4532       0.0599

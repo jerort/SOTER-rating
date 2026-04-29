@@ -1,0 +1,421 @@
+Using device: cuda
+Experiment folder: D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260411_165210_CET
+
+--- Configuration ---
+MODEL_TYPE                : autoencoder
+NUM_CLASSES               : 5
+AUTOENCODER_BASE_CHANNELS : 32
+USE_UNET                  : True
+EPOCHS=50  BATCH_SIZE=32  LR=0.001  WD=1e-05
+MIN_EPOCH_SIZE=2000  EARLY_STOP_PATIENCE=10
+
+============================================================
+Training one autoencoder per class
+============================================================
+
+Training class distribution: {1: 310, 2: 1708, 3: 1773, 4: 414, 5: 63}
+
+--- Class 1 ---
+  Samples: 310 train, 39 val
+  Architecture: UNet  Parameters: 821,219
+  Epoch 1/50 | train_mse: 0.014365 | val_mse: 0.001982
+    -> Saved best model (val_mse: 0.001982)
+  Epoch 2/50 | train_mse: 0.002413 | val_mse: 0.001195
+    -> Saved best model (val_mse: 0.001195)
+  Epoch 3/50 | train_mse: 0.001904 | val_mse: 0.000875
+    -> Saved best model (val_mse: 0.000875)
+  Epoch 4/50 | train_mse: 0.001549 | val_mse: 0.000751
+    -> Saved best model (val_mse: 0.000751)
+  Epoch 5/50 | train_mse: 0.001670 | val_mse: 0.000567
+    -> Saved best model (val_mse: 0.000567)
+  Epoch 6/50 | train_mse: 0.001325 | val_mse: 0.000585
+  Epoch 7/50 | train_mse: 0.001058 | val_mse: 0.000459
+    -> Saved best model (val_mse: 0.000459)
+  Epoch 8/50 | train_mse: 0.001352 | val_mse: 0.000562
+  Epoch 9/50 | train_mse: 0.001145 | val_mse: 0.000458
+    -> Saved best model (val_mse: 0.000458)
+  Epoch 10/50 | train_mse: 0.000996 | val_mse: 0.000368
+    -> Saved best model (val_mse: 0.000368)
+  Epoch 11/50 | train_mse: 0.000913 | val_mse: 0.000396
+  Epoch 12/50 | train_mse: 0.001051 | val_mse: 0.000455
+  Epoch 13/50 | train_mse: 0.001146 | val_mse: 0.000447
+  Epoch 14/50 | train_mse: 0.001037 | val_mse: 0.000717
+  Epoch 15/50 | train_mse: 0.000845 | val_mse: 0.000340
+    -> Saved best model (val_mse: 0.000340)
+  Epoch 16/50 | train_mse: 0.000750 | val_mse: 0.000305
+    -> Saved best model (val_mse: 0.000305)
+  Epoch 17/50 | train_mse: 0.000778 | val_mse: 0.000259
+    -> Saved best model (val_mse: 0.000259)
+  Epoch 18/50 | train_mse: 0.000906 | val_mse: 0.000369
+  Epoch 19/50 | train_mse: 0.000860 | val_mse: 0.000268
+  Epoch 20/50 | train_mse: 0.000770 | val_mse: 0.000231
+    -> Saved best model (val_mse: 0.000231)
+  Epoch 21/50 | train_mse: 0.000738 | val_mse: 0.000312
+  Epoch 22/50 | train_mse: 0.000768 | val_mse: 0.000331
+  Epoch 23/50 | train_mse: 0.000912 | val_mse: 0.000426
+  Epoch 24/50 | train_mse: 0.000725 | val_mse: 0.000460
+  Epoch 25/50 | train_mse: 0.000701 | val_mse: 0.000219
+    -> Saved best model (val_mse: 0.000219)
+  Epoch 26/50 | train_mse: 0.000796 | val_mse: 0.000205
+    -> Saved best model (val_mse: 0.000205)
+  Epoch 27/50 | train_mse: 0.000707 | val_mse: 0.000212
+  Epoch 28/50 | train_mse: 0.000950 | val_mse: 0.000226
+  Epoch 29/50 | train_mse: 0.000635 | val_mse: 0.000247
+  Epoch 30/50 | train_mse: 0.000664 | val_mse: 0.000243
+  Epoch 31/50 | train_mse: 0.000695 | val_mse: 0.000211
+  Epoch 32/50 | train_mse: 0.000625 | val_mse: 0.000211
+  Epoch 33/50 | train_mse: 0.000803 | val_mse: 0.000212
+  Epoch 34/50 | train_mse: 0.000840 | val_mse: 0.000201
+    -> Saved best model (val_mse: 0.000201)
+  Epoch 35/50 | train_mse: 0.000617 | val_mse: 0.000250
+  Epoch 36/50 | train_mse: 0.000762 | val_mse: 0.000201
+  Epoch 37/50 | train_mse: 0.000818 | val_mse: 0.000336
+  Epoch 38/50 | train_mse: 0.000789 | val_mse: 0.000265
+  Epoch 39/50 | train_mse: 0.000685 | val_mse: 0.000410
+  Epoch 40/50 | train_mse: 0.000699 | val_mse: 0.000206
+  Epoch 41/50 | train_mse: 0.000658 | val_mse: 0.000187
+    -> Saved best model (val_mse: 0.000187)
+  Epoch 42/50 | train_mse: 0.000581 | val_mse: 0.000231
+  Epoch 43/50 | train_mse: 0.000854 | val_mse: 0.000425
+  Epoch 44/50 | train_mse: 0.000636 | val_mse: 0.000202
+  Epoch 45/50 | train_mse: 0.000693 | val_mse: 0.000184
+    -> Saved best model (val_mse: 0.000184)
+  Epoch 46/50 | train_mse: 0.000700 | val_mse: 0.000222
+  Epoch 47/50 | train_mse: 0.000624 | val_mse: 0.000200
+  Epoch 48/50 | train_mse: 0.000616 | val_mse: 0.000198
+  Epoch 49/50 | train_mse: 0.000790 | val_mse: 0.000300
+  Epoch 50/50 | train_mse: 0.000608 | val_mse: 0.000202
+  Best val MSE for class 1: 0.000184
+
+--- Class 2 ---
+  Samples: 1708 train, 213 val
+  Architecture: UNet  Parameters: 821,219
+  Epoch 1/50 | train_mse: 0.016130 | val_mse: 0.002477
+    -> Saved best model (val_mse: 0.002477)
+  Epoch 2/50 | train_mse: 0.002742 | val_mse: 0.000946
+    -> Saved best model (val_mse: 0.000946)
+  Epoch 3/50 | train_mse: 0.002055 | val_mse: 0.000825
+    -> Saved best model (val_mse: 0.000825)
+  Epoch 4/50 | train_mse: 0.001698 | val_mse: 0.001083
+  Epoch 5/50 | train_mse: 0.001479 | val_mse: 0.000696
+    -> Saved best model (val_mse: 0.000696)
+  Epoch 6/50 | train_mse: 0.001313 | val_mse: 0.000569
+    -> Saved best model (val_mse: 0.000569)
+  Epoch 7/50 | train_mse: 0.001288 | val_mse: 0.000621
+  Epoch 8/50 | train_mse: 0.001157 | val_mse: 0.000436
+    -> Saved best model (val_mse: 0.000436)
+  Epoch 9/50 | train_mse: 0.001239 | val_mse: 0.000586
+  Epoch 10/50 | train_mse: 0.001358 | val_mse: 0.000392
+    -> Saved best model (val_mse: 0.000392)
+  Epoch 11/50 | train_mse: 0.001393 | val_mse: 0.000433
+  Epoch 12/50 | train_mse: 0.000950 | val_mse: 0.000479
+  Epoch 13/50 | train_mse: 0.000945 | val_mse: 0.000691
+  Epoch 14/50 | train_mse: 0.001042 | val_mse: 0.000405
+  Epoch 15/50 | train_mse: 0.000905 | val_mse: 0.000358
+    -> Saved best model (val_mse: 0.000358)
+  Epoch 16/50 | train_mse: 0.000867 | val_mse: 0.000364
+  Epoch 17/50 | train_mse: 0.000836 | val_mse: 0.000322
+    -> Saved best model (val_mse: 0.000322)
+  Epoch 18/50 | train_mse: 0.000980 | val_mse: 0.000256
+    -> Saved best model (val_mse: 0.000256)
+  Epoch 19/50 | train_mse: 0.001038 | val_mse: 0.000373
+  Epoch 20/50 | train_mse: 0.000880 | val_mse: 0.000678
+  Epoch 21/50 | train_mse: 0.000903 | val_mse: 0.000390
+  Epoch 22/50 | train_mse: 0.001056 | val_mse: 0.000209
+    -> Saved best model (val_mse: 0.000209)
+  Epoch 23/50 | train_mse: 0.000740 | val_mse: 0.000206
+    -> Saved best model (val_mse: 0.000206)
+  Epoch 24/50 | train_mse: 0.000836 | val_mse: 0.000207
+  Epoch 25/50 | train_mse: 0.000750 | val_mse: 0.000223
+  Epoch 26/50 | train_mse: 0.000873 | val_mse: 0.000228
+  Epoch 27/50 | train_mse: 0.000815 | val_mse: 0.000419
+  Epoch 28/50 | train_mse: 0.000794 | val_mse: 0.000234
+  Epoch 29/50 | train_mse: 0.000869 | val_mse: 0.000230
+  Epoch 30/50 | train_mse: 0.000831 | val_mse: 0.000606
+  Epoch 31/50 | train_mse: 0.000805 | val_mse: 0.000215
+  Epoch 32/50 | train_mse: 0.000929 | val_mse: 0.000266
+  Epoch 33/50 | train_mse: 0.000639 | val_mse: 0.000261
+    Early stopping at epoch 33
+  Best val MSE for class 2: 0.000206
+
+--- Class 3 ---
+  Samples: 1773 train, 221 val
+  Architecture: UNet  Parameters: 821,219
+  Epoch 1/50 | train_mse: 0.015640 | val_mse: 0.002194
+    -> Saved best model (val_mse: 0.002194)
+  Epoch 2/50 | train_mse: 0.002507 | val_mse: 0.000968
+    -> Saved best model (val_mse: 0.000968)
+  Epoch 3/50 | train_mse: 0.002030 | val_mse: 0.000735
+    -> Saved best model (val_mse: 0.000735)
+  Epoch 4/50 | train_mse: 0.001840 | val_mse: 0.000991
+  Epoch 5/50 | train_mse: 0.001507 | val_mse: 0.000740
+  Epoch 6/50 | train_mse: 0.001610 | val_mse: 0.000519
+    -> Saved best model (val_mse: 0.000519)
+  Epoch 7/50 | train_mse: 0.001218 | val_mse: 0.000424
+    -> Saved best model (val_mse: 0.000424)
+  Epoch 8/50 | train_mse: 0.001080 | val_mse: 0.000529
+  Epoch 9/50 | train_mse: 0.001057 | val_mse: 0.000437
+  Epoch 10/50 | train_mse: 0.001171 | val_mse: 0.000578
+  Epoch 11/50 | train_mse: 0.001177 | val_mse: 0.000471
+  Epoch 12/50 | train_mse: 0.000940 | val_mse: 0.000441
+  Epoch 13/50 | train_mse: 0.001082 | val_mse: 0.000557
+  Epoch 14/50 | train_mse: 0.000876 | val_mse: 0.000399
+    -> Saved best model (val_mse: 0.000399)
+  Epoch 15/50 | train_mse: 0.000767 | val_mse: 0.000634
+  Epoch 16/50 | train_mse: 0.000866 | val_mse: 0.000639
+  Epoch 17/50 | train_mse: 0.000914 | val_mse: 0.000373
+    -> Saved best model (val_mse: 0.000373)
+  Epoch 18/50 | train_mse: 0.000834 | val_mse: 0.000285
+    -> Saved best model (val_mse: 0.000285)
+  Epoch 19/50 | train_mse: 0.000898 | val_mse: 0.000337
+  Epoch 20/50 | train_mse: 0.000821 | val_mse: 0.000420
+  Epoch 21/50 | train_mse: 0.000885 | val_mse: 0.000497
+  Epoch 22/50 | train_mse: 0.001010 | val_mse: 0.000281
+    -> Saved best model (val_mse: 0.000281)
+  Epoch 23/50 | train_mse: 0.000816 | val_mse: 0.000240
+    -> Saved best model (val_mse: 0.000240)
+  Epoch 24/50 | train_mse: 0.000702 | val_mse: 0.000433
+  Epoch 25/50 | train_mse: 0.000838 | val_mse: 0.000284
+  Epoch 26/50 | train_mse: 0.000885 | val_mse: 0.000234
+    -> Saved best model (val_mse: 0.000234)
+  Epoch 27/50 | train_mse: 0.000715 | val_mse: 0.000284
+  Epoch 28/50 | train_mse: 0.000712 | val_mse: 0.000213
+    -> Saved best model (val_mse: 0.000213)
+  Epoch 29/50 | train_mse: 0.000780 | val_mse: 0.000544
+  Epoch 30/50 | train_mse: 0.000742 | val_mse: 0.000277
+  Epoch 31/50 | train_mse: 0.000766 | val_mse: 0.000388
+  Epoch 32/50 | train_mse: 0.000695 | val_mse: 0.000415
+  Epoch 33/50 | train_mse: 0.000709 | val_mse: 0.000259
+  Epoch 34/50 | train_mse: 0.000623 | val_mse: 0.000185
+    -> Saved best model (val_mse: 0.000185)
+  Epoch 35/50 | train_mse: 0.000765 | val_mse: 0.000169
+    -> Saved best model (val_mse: 0.000169)
+  Epoch 36/50 | train_mse: 0.000744 | val_mse: 0.000228
+  Epoch 37/50 | train_mse: 0.000603 | val_mse: 0.000172
+  Epoch 38/50 | train_mse: 0.000710 | val_mse: 0.000283
+  Epoch 39/50 | train_mse: 0.000948 | val_mse: 0.000391
+  Epoch 40/50 | train_mse: 0.000609 | val_mse: 0.000160
+    -> Saved best model (val_mse: 0.000160)
+  Epoch 41/50 | train_mse: 0.000664 | val_mse: 0.000185
+  Epoch 42/50 | train_mse: 0.000761 | val_mse: 0.000188
+  Epoch 43/50 | train_mse: 0.000578 | val_mse: 0.000169
+  Epoch 44/50 | train_mse: 0.000587 | val_mse: 0.000165
+  Epoch 45/50 | train_mse: 0.000634 | val_mse: 0.000156
+    -> Saved best model (val_mse: 0.000156)
+  Epoch 46/50 | train_mse: 0.000585 | val_mse: 0.000201
+  Epoch 47/50 | train_mse: 0.000560 | val_mse: 0.000156
+    -> Saved best model (val_mse: 0.000156)
+  Epoch 48/50 | train_mse: 0.000553 | val_mse: 0.000165
+  Epoch 49/50 | train_mse: 0.000688 | val_mse: 0.000149
+    -> Saved best model (val_mse: 0.000149)
+  Epoch 50/50 | train_mse: 0.000472 | val_mse: 0.000202
+  Best val MSE for class 3: 0.000149
+
+--- Class 4 ---
+  Samples: 414 train, 52 val
+  Architecture: UNet  Parameters: 821,219
+  Epoch 1/50 | train_mse: 0.014727 | val_mse: 0.002263
+    -> Saved best model (val_mse: 0.002263)
+  Epoch 2/50 | train_mse: 0.002687 | val_mse: 0.001149
+    -> Saved best model (val_mse: 0.001149)
+  Epoch 3/50 | train_mse: 0.002009 | val_mse: 0.000843
+    -> Saved best model (val_mse: 0.000843)
+  Epoch 4/50 | train_mse: 0.001634 | val_mse: 0.000718
+    -> Saved best model (val_mse: 0.000718)
+  Epoch 5/50 | train_mse: 0.001524 | val_mse: 0.000640
+    -> Saved best model (val_mse: 0.000640)
+  Epoch 6/50 | train_mse: 0.001689 | val_mse: 0.000633
+    -> Saved best model (val_mse: 0.000633)
+  Epoch 7/50 | train_mse: 0.001585 | val_mse: 0.000491
+    -> Saved best model (val_mse: 0.000491)
+  Epoch 8/50 | train_mse: 0.001704 | val_mse: 0.001099
+  Epoch 9/50 | train_mse: 0.001216 | val_mse: 0.000422
+    -> Saved best model (val_mse: 0.000422)
+  Epoch 10/50 | train_mse: 0.001346 | val_mse: 0.000496
+  Epoch 11/50 | train_mse: 0.001019 | val_mse: 0.000533
+  Epoch 12/50 | train_mse: 0.001156 | val_mse: 0.001062
+  Epoch 13/50 | train_mse: 0.001033 | val_mse: 0.000420
+    -> Saved best model (val_mse: 0.000420)
+  Epoch 14/50 | train_mse: 0.000926 | val_mse: 0.000408
+    -> Saved best model (val_mse: 0.000408)
+  Epoch 15/50 | train_mse: 0.000925 | val_mse: 0.000854
+  Epoch 16/50 | train_mse: 0.001026 | val_mse: 0.000473
+  Epoch 17/50 | train_mse: 0.001055 | val_mse: 0.000378
+    -> Saved best model (val_mse: 0.000378)
+  Epoch 18/50 | train_mse: 0.000946 | val_mse: 0.000409
+  Epoch 19/50 | train_mse: 0.000905 | val_mse: 0.000692
+  Epoch 20/50 | train_mse: 0.001246 | val_mse: 0.000331
+    -> Saved best model (val_mse: 0.000331)
+  Epoch 21/50 | train_mse: 0.001302 | val_mse: 0.000530
+  Epoch 22/50 | train_mse: 0.000933 | val_mse: 0.000534
+  Epoch 23/50 | train_mse: 0.000822 | val_mse: 0.000268
+    -> Saved best model (val_mse: 0.000268)
+  Epoch 24/50 | train_mse: 0.001032 | val_mse: 0.000439
+  Epoch 25/50 | train_mse: 0.001158 | val_mse: 0.000404
+  Epoch 26/50 | train_mse: 0.000952 | val_mse: 0.000298
+  Epoch 27/50 | train_mse: 0.000912 | val_mse: 0.000245
+    -> Saved best model (val_mse: 0.000245)
+  Epoch 28/50 | train_mse: 0.000866 | val_mse: 0.000267
+  Epoch 29/50 | train_mse: 0.000865 | val_mse: 0.000305
+  Epoch 30/50 | train_mse: 0.000887 | val_mse: 0.000413
+  Epoch 31/50 | train_mse: 0.000690 | val_mse: 0.000256
+  Epoch 32/50 | train_mse: 0.000900 | val_mse: 0.000472
+  Epoch 33/50 | train_mse: 0.001023 | val_mse: 0.000207
+    -> Saved best model (val_mse: 0.000207)
+  Epoch 34/50 | train_mse: 0.000703 | val_mse: 0.000249
+  Epoch 35/50 | train_mse: 0.000805 | val_mse: 0.000431
+  Epoch 36/50 | train_mse: 0.000735 | val_mse: 0.000201
+    -> Saved best model (val_mse: 0.000201)
+  Epoch 37/50 | train_mse: 0.000756 | val_mse: 0.000342
+  Epoch 38/50 | train_mse: 0.000784 | val_mse: 0.000380
+  Epoch 39/50 | train_mse: 0.000896 | val_mse: 0.000224
+  Epoch 40/50 | train_mse: 0.000973 | val_mse: 0.000178
+    -> Saved best model (val_mse: 0.000178)
+  Epoch 41/50 | train_mse: 0.000792 | val_mse: 0.000418
+  Epoch 42/50 | train_mse: 0.000592 | val_mse: 0.000217
+  Epoch 43/50 | train_mse: 0.000666 | val_mse: 0.000258
+  Epoch 44/50 | train_mse: 0.000651 | val_mse: 0.000504
+  Epoch 45/50 | train_mse: 0.000594 | val_mse: 0.000155
+    -> Saved best model (val_mse: 0.000155)
+  Epoch 46/50 | train_mse: 0.000686 | val_mse: 0.000199
+  Epoch 47/50 | train_mse: 0.000699 | val_mse: 0.000145
+    -> Saved best model (val_mse: 0.000145)
+  Epoch 48/50 | train_mse: 0.000635 | val_mse: 0.000148
+  Epoch 49/50 | train_mse: 0.000718 | val_mse: 0.000296
+  Epoch 50/50 | train_mse: 0.000555 | val_mse: 0.000163
+  Best val MSE for class 4: 0.000145
+
+--- Class 5 ---
+  Samples: 63 train, 8 val
+  Architecture: UNet  Parameters: 821,219
+  Epoch 1/50 | train_mse: 0.018926 | val_mse: 0.001687
+    -> Saved best model (val_mse: 0.001687)
+  Epoch 2/50 | train_mse: 0.003249 | val_mse: 0.000946
+    -> Saved best model (val_mse: 0.000946)
+  Epoch 3/50 | train_mse: 0.002222 | val_mse: 0.000595
+    -> Saved best model (val_mse: 0.000595)
+  Epoch 4/50 | train_mse: 0.001778 | val_mse: 0.000437
+    -> Saved best model (val_mse: 0.000437)
+  Epoch 5/50 | train_mse: 0.001623 | val_mse: 0.000424
+    -> Saved best model (val_mse: 0.000424)
+  Epoch 6/50 | train_mse: 0.001690 | val_mse: 0.000354
+    -> Saved best model (val_mse: 0.000354)
+  Epoch 7/50 | train_mse: 0.002162 | val_mse: 0.000555
+  Epoch 8/50 | train_mse: 0.001605 | val_mse: 0.000741
+  Epoch 9/50 | train_mse: 0.001430 | val_mse: 0.000285
+    -> Saved best model (val_mse: 0.000285)
+  Epoch 10/50 | train_mse: 0.001114 | val_mse: 0.000390
+  Epoch 11/50 | train_mse: 0.001126 | val_mse: 0.000246
+    -> Saved best model (val_mse: 0.000246)
+  Epoch 12/50 | train_mse: 0.001345 | val_mse: 0.000562
+  Epoch 13/50 | train_mse: 0.001125 | val_mse: 0.000218
+    -> Saved best model (val_mse: 0.000218)
+  Epoch 14/50 | train_mse: 0.001308 | val_mse: 0.000231
+  Epoch 15/50 | train_mse: 0.001369 | val_mse: 0.001199
+  Epoch 16/50 | train_mse: 0.001175 | val_mse: 0.000490
+  Epoch 17/50 | train_mse: 0.000917 | val_mse: 0.000227
+  Epoch 18/50 | train_mse: 0.000853 | val_mse: 0.000193
+    -> Saved best model (val_mse: 0.000193)
+  Epoch 19/50 | train_mse: 0.001113 | val_mse: 0.000154
+    -> Saved best model (val_mse: 0.000154)
+  Epoch 20/50 | train_mse: 0.000786 | val_mse: 0.000241
+  Epoch 21/50 | train_mse: 0.000903 | val_mse: 0.000197
+  Epoch 22/50 | train_mse: 0.001124 | val_mse: 0.000150
+    -> Saved best model (val_mse: 0.000150)
+  Epoch 23/50 | train_mse: 0.001114 | val_mse: 0.000179
+  Epoch 24/50 | train_mse: 0.001085 | val_mse: 0.000209
+  Epoch 25/50 | train_mse: 0.000924 | val_mse: 0.000207
+  Epoch 26/50 | train_mse: 0.001021 | val_mse: 0.000168
+  Epoch 27/50 | train_mse: 0.000739 | val_mse: 0.000132
+    -> Saved best model (val_mse: 0.000132)
+  Epoch 28/50 | train_mse: 0.000976 | val_mse: 0.000152
+  Epoch 29/50 | train_mse: 0.000785 | val_mse: 0.000303
+  Epoch 30/50 | train_mse: 0.000950 | val_mse: 0.000151
+  Epoch 31/50 | train_mse: 0.000684 | val_mse: 0.000137
+  Epoch 32/50 | train_mse: 0.000731 | val_mse: 0.000170
+  Epoch 33/50 | train_mse: 0.000720 | val_mse: 0.000122
+    -> Saved best model (val_mse: 0.000122)
+  Epoch 34/50 | train_mse: 0.000819 | val_mse: 0.000216
+  Epoch 35/50 | train_mse: 0.000815 | val_mse: 0.000154
+  Epoch 36/50 | train_mse: 0.000796 | val_mse: 0.000134
+  Epoch 37/50 | train_mse: 0.000868 | val_mse: 0.000200
+  Epoch 38/50 | train_mse: 0.000649 | val_mse: 0.000121
+    -> Saved best model (val_mse: 0.000121)
+  Epoch 39/50 | train_mse: 0.000689 | val_mse: 0.000125
+  Epoch 40/50 | train_mse: 0.000686 | val_mse: 0.000133
+  Epoch 41/50 | train_mse: 0.000675 | val_mse: 0.000131
+  Epoch 42/50 | train_mse: 0.000771 | val_mse: 0.000135
+  Epoch 43/50 | train_mse: 0.000670 | val_mse: 0.000140
+  Epoch 44/50 | train_mse: 0.000644 | val_mse: 0.000188
+  Epoch 45/50 | train_mse: 0.000670 | val_mse: 0.000146
+  Epoch 46/50 | train_mse: 0.000517 | val_mse: 0.000132
+  Epoch 47/50 | train_mse: 0.000524 | val_mse: 0.000142
+  Epoch 48/50 | train_mse: 0.000676 | val_mse: 0.000151
+    Early stopping at epoch 48
+  Best val MSE for class 5: 0.000121
+
+============================================================
+Classification by minimum reconstruction MSE
+============================================================
+  Loaded class 1 autoencoder (unet) from epoch 45
+  Loaded class 2 autoencoder (unet) from epoch 23
+  Loaded class 3 autoencoder (unet) from epoch 49
+  Loaded class 4 autoencoder (unet) from epoch 47
+  Loaded class 5 autoencoder (unet) from epoch 38
+
+Evaluating on val set...
+
+VAL confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |    10     0     3    26     0
+        2 |    40     0    26   145     2
+        3 |    23     0    36   158     4
+        4 |     6     0     5    41     0
+        5 |     1     0     0     6     1
+
+VAL confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |    50    29   173
+        2 |    23    36   162
+        3 |     7     5    48
+
+Evaluating on test set...
+
+TEST confusion matrix (5-class)
+true\pred |     1     2     3     4     5
+-----------------------------------------
+        1 |     8     0     6    24     0
+        2 |    49     0    33   127     5
+        3 |    31     0    33   156     2
+        4 |     1     0     8    42     1
+        5 |     0     0     1     7     0
+
+TEST confusion matrix (3-class)
+true\pred |     1     2     3
+-----------------------------
+        1 |    57    39   156
+        2 |    31    33   158
+        3 |     1     9    50
+
+Saved metrics_5class.csv and metrics_3class.csv to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260411_165210_CET
+Saved confusion matrix CSVs to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260411_165210_CET
+Saved MSE matrices (.npy) for calibration
+
+Saving reconstruction visualisations...
+Saved reconstruction grids to D:\SOTER\SOTER\scripts\rating\experiments\experiment_20260411_165210_CET
+
+============================================================
+Metrics Summary (5-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3  precision_c4  recall_c4  f1_c4  precision_c5  recall_c5  f1_c5  range_0_pct  range_1_pct  range_2_pct  range_3_pct  range_4_pct
+    val             0.2666 0.0821      0.1000        0.1250     0.2564 0.1681        0.0000     0.0000 0.0000        0.5143     0.1629 0.2474        0.1090     0.7885 0.1916        0.1429     0.1250 0.1333       0.1651       0.4409       0.3283       0.0638       0.0019
+   test             0.2334 0.1205      0.1482        0.0899     0.2105 0.1260        0.0000     0.0000 0.0000        0.4074     0.1486 0.2178        0.1180     0.8077 0.2059        0.0000     0.0000 0.0000       0.1554       0.4757       0.3127       0.0562       0.0000
+
+============================================================
+Metrics Summary (3-class)
+============================================================
+dataset  balanced_accuracy    qwk  spearman_r  precision_c1  recall_c1  f1_c1  precision_c2  recall_c2  f1_c2  precision_c3  recall_c3  f1_c3  range_0_pct  range_1_pct  range_2_pct
+    val             0.3871 0.0547      0.0914        0.6250     0.1984 0.3012        0.5143     0.1629 0.2474        0.1253     0.8000 0.2167       0.2514       0.4109       0.3377
+   test             0.4027 0.1015      0.1616        0.6404     0.2262 0.3343        0.4074     0.1486 0.2178        0.1374     0.8333 0.2358       0.2622       0.4438       0.2940

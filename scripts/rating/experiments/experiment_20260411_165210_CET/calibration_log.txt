@@ -1,0 +1,22 @@
+Experiment: experiment_20260411_165210_CET
+Experiment type: autoencoder
+Using device: cuda
+
+============================================================
+Autoencoder calibration (temperature scaling)
+============================================================
+  Loaded class 1 autoencoder from epoch 45
+  Loaded class 2 autoencoder from epoch 23
+  Loaded class 3 autoencoder from epoch 49
+  Loaded class 4 autoencoder from epoch 47
+  Loaded class 5 autoencoder from epoch 38
+
+  TemperatureCalibrator: T=22026.336249
+  val: balanced_acc=0.2000  qwk=0.0000  ece=0.1268  brier=0.8000
+  test: balanced_acc=0.2000  qwk=0.0000  ece=0.1288  brier=0.8000
+
+Saved calibration parameters to calibration_params.json
+
+============================================================
+Calibration complete!
+============================================================

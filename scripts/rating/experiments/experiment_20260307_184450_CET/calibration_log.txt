@@ -1,0 +1,26 @@
+Experiment: experiment_20260307_184450_CET
+Experiment type: regressor
+Using device: cuda
+
+============================================================
+Regressor calibration
+============================================================
+  Loaded model: backbone=vit_l_16, epoch=21
+  Val predictions: N=533, y_hat range=[1.056, 5.536]
+
+  GaussianCalibrator: sigma=0.9916
+  OrdinalLogisticCalibrator: beta=0.5373, alphas=['-1.179', '1.308', '3.548', '5.696']
+
+--- GAUSSIAN calibration ---
+  val: balanced_acc=0.2619  qwk=0.2089  ece=0.0333  brier=0.7185
+  test: balanced_acc=0.2514  qwk=0.2492  ece=0.0578  brier=0.7045
+
+--- ORDINAL calibration ---
+  val: balanced_acc=0.2202  qwk=0.1503  ece=0.0126  brier=0.6467
+  test: balanced_acc=0.2248  qwk=0.2009  ece=0.0102  brier=0.6399
+
+Saved calibration parameters to calibration_params.json
+
+============================================================
+Calibration complete!
+============================================================
