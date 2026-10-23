@@ -204,3 +204,10 @@ cython_debug/
 
 # Claude Code project configuration (local AI assistant context)
 .claude/
+
+# Outputs of a local run of the nested cross-validation (backbone feature caches, Optuna studies,
+# curves, logs); the paper's results are in results/
+scripts/rating/nested_cv/runs/
+
+# Image tiles (commercial imagery, not distributed; see README.md)
+/data/

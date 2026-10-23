@@ -27,6 +27,25 @@ from sklearn.metrics import (
 # ── ImageNet normalisation (fixed standard values) ────────────────────
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD  = (0.229, 0.224, 0.225)
+# 4-band variant for the 16-bit R,G,B,NIR SR tiles: ImageNet RGB + a neutral NIR.
+IMAGENET_MEAN_4 = (0.485, 0.456, 0.406, 0.450)
+IMAGENET_STD_4  = (0.229, 0.224, 0.225, 0.225)
+UINT16_MAX = 65535.0
+
+
+def read_multiband(path: str, in_channels: int) -> np.ndarray:
+    """Load a 16-bit multiband TIFF as float32 (H, W, in_channels) in [0, 1].
+
+    Mirrors neosr's read (uint16 / 65535) and tolerates planar (C,H,W) layout."""
+    import tifffile
+    arr = tifffile.imread(path)
+    if arr.ndim == 2:
+        arr = arr[..., None]
+    elif arr.ndim == 3 and arr.shape[0] <= 4 and arr.shape[0] < arr.shape[-1]:
+        arr = np.transpose(arr, (1, 2, 0))  # (C,H,W) -> (H,W,C)
+    arr = arr[..., :in_channels].astype(np.float32)
+    denom = 255.0 if arr.dtype == np.uint8 else UINT16_MAX
+    return arr / denom
 
 # ── Channel counts per backbone ───────────────────────────────────────
 _RESNET_CHANNELS   = {"resnet18": 512, "resnet50": 2048, "resnet152": 2048}
@@ -58,7 +77,11 @@ class Logger:
         open(log_path, "w", encoding="utf-8").close()
 
     def log(self, msg: str = "") -> None:
-        print(msg)
+        try:
+            print(msg)
+        except UnicodeEncodeError:
+            # console may be cp1252 (Windows); the log file is utf-8 and keeps the original
+            print(msg.encode("ascii", "replace").decode("ascii"))
         with open(self.log_path, "a", encoding="utf-8") as f:
             f.write(msg + "\n")
 
@@ -75,6 +98,25 @@ def create_experiment_folder(experiments_dir: str) -> Path:
 # =========================
 # Dataset
 # =========================
+
+# Decoded tiles, kept in memory for the life of the process. Decoding the PNG was the largest
+# part of loading (0.66 of 1.4 ms per tile, measured 2026-10-02), and the same tiles are read
+# again at every epoch and every check. A tile is now read and decoded once; later epochs,
+# checks and runs in the same process get the identical pixels from RAM. The tiles are small
+# (202x54 px RGB, ~33 KB decoded), so all 5,359 tiles of one input take ~175 MB.
+_TILE_CACHE: dict = {}
+
+
+def load_rgb_cached(fpath: str) -> Image.Image:
+    """The tile at *fpath* as an RGB PIL image, decoded from disk only the first time.
+    The cached image is shared: transforms must return new images (torchvision's do)."""
+    im = _TILE_CACHE.get(fpath)
+    if im is None:
+        with Image.open(fpath) as f:
+            im = f.convert("RGB")          # convert() returns a new, fully loaded image
+        _TILE_CACHE[fpath] = im
+    return im
+
 
 class RatingsDataset(Dataset):
     """CSV-backed dataset of road-segment images with float quality ratings.
@@ -95,6 +137,7 @@ class RatingsDataset(Dataset):
         class_weights=None,
         augment_transform=None,
         augmented_classes=None,
+        in_channels=3,
     ):
         self.csv_path         = csv_path
         self.data_root        = data_root
@@ -102,31 +145,44 @@ class RatingsDataset(Dataset):
         self.class_weights    = class_weights
         self.augment_transform = augment_transform
         self.augmented_classes = augmented_classes or []
+        self.in_channels      = in_channels   # 3 -> PIL RGB (8-bit); 4 -> 16-bit R,G,B,NIR TIFF
         self.df = pd.read_csv(self.csv_path)
         required_cols = {"filepath", "rating"}
         if not required_cols.issubset(self.df.columns):
             raise ValueError(f"CSV must contain columns: {required_cols}")
+        # full paths and ratings as plain lists: a pandas row lookup per tile is slow. The CSVs
+        # store Windows paths (ROI\ROAD\tile.png); on Linux the separators are converted.
+        fps = self.df["filepath"]
+        if os.sep == "/":
+            fps = fps.str.replace("\\", "/", regex=False)
+        self._paths = [f if os.path.isabs(f) else os.path.join(self.data_root, f) for f in fps]
+        self._ratings = [float(r) for r in self.df["rating"]]
 
     def __len__(self) -> int:
         return len(self.df)
 
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        row    = self.df.iloc[idx]
-        fpath  = row["filepath"]
-        rating = float(row["rating"])
+        fpath  = self._paths[idx]
+        rating = self._ratings[idx]
 
-        if not os.path.isabs(fpath):
-            fpath = os.path.join(self.data_root, fpath)
+        use_aug = (self.augment_transform is not None
+                   and int(round(rating)) in self.augmented_classes)
 
-        with Image.open(fpath) as img:
-            img = img.convert("RGB")
-            if (
-                self.augment_transform is not None
-                and int(round(rating)) in self.augmented_classes
-            ):
-                img = self.augment_transform(img)
+        if self.in_channels != 3:
+            # 16-bit multiband TIFF -> [C,H,W] float tensor; transforms operate on tensors
+            arr = read_multiband(fpath, self.in_channels)        # (H, W, C) in [0, 1]
+            img = torch.from_numpy(arr).permute(2, 0, 1).contiguous()
+            tfm = self.augment_transform if use_aug else self.transform
+            if tfm is not None:
+                img = tfm(img)
+        else:
+            im = load_rgb_cached(fpath)
+            if use_aug:
+                img = self.augment_transform(im)
             elif self.transform is not None:
-                img = self.transform(img)
+                img = self.transform(im)
+            else:
+                img = im.copy()               # never hand out the shared cached image
 
         rating_tensor = torch.tensor(rating, dtype=torch.float32)
 
@@ -139,28 +195,50 @@ class RatingsDataset(Dataset):
         return img, rating_tensor, weight_tensor
 
 
-def build_transforms(img_height: int, img_width: int) -> transforms.Compose:
+def build_transforms(img_height: int, img_width: int, in_channels: int = 3) -> transforms.Compose:
+    if in_channels == 3:
+        return transforms.Compose([
+            transforms.Resize((img_height, img_width)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
+        ])
+    # 16-bit multiband path: input is already a [C,H,W] float tensor in [0,1]
     return transforms.Compose([
-        transforms.Resize((img_height, img_width)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
+        transforms.Resize((img_height, img_width), antialias=True),
+        transforms.Normalize(mean=IMAGENET_MEAN_4[:in_channels], std=IMAGENET_STD_4[:in_channels]),
     ])
 
 
-def build_augmented_transforms(img_height: int, img_width: int) -> transforms.Compose:
-    """Flip + colour jitter for minority classes, with resize to match base transform."""
+def build_augmented_transforms(img_height: int, img_width: int, in_channels: int = 3) -> transforms.Compose:
+    """Flips for minority classes (colour jitter only in the 3-band PIL path)."""
+    if in_channels == 3:
+        return transforms.Compose([
+            transforms.Resize((img_height, img_width)),
+            transforms.RandomHorizontalFlip(),
+            transforms.RandomVerticalFlip(),
+            transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.1),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
+        ])
+    # 16-bit multiband path (tensor in): flips are channel-agnostic; ColorJitter is PIL-only so omitted
     return transforms.Compose([
-        transforms.Resize((img_height, img_width)),
+        transforms.Resize((img_height, img_width), antialias=True),
         transforms.RandomHorizontalFlip(),
         transforms.RandomVerticalFlip(),
-        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.1),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
+        transforms.Normalize(mean=IMAGENET_MEAN_4[:in_channels], std=IMAGENET_STD_4[:in_channels]),
     ])
 
 
-def calculate_class_weights(train_csv: str) -> dict:
-    """Per-class weights as squared inverse frequency."""
+def calculate_class_weights(train_csv: str, mode: str = "squared") -> dict:
+    """Per-class loss weights from the training label counts.
+
+    mode "inverse": w = N / (K * n_c), the standard "balanced" weights (scikit-learn,
+        after King & Zeng 2001). Every class then carries the same total weight, so the
+        weighted training loss equals the loss averaged within each class and then across
+        classes: the same grade-averaged quantity used for early stopping and evaluation.
+    mode "squared": w squared (the original behaviour, kept so archived runs reproduce).
+    """
+    assert mode in ("inverse", "squared"), mode
     df = pd.read_csv(train_csv)
     ratings      = df["rating"].round().astype(int)
     class_counts = ratings.value_counts().to_dict()
@@ -170,7 +248,7 @@ def calculate_class_weights(train_csv: str) -> dict:
     for r in range(1, 6):
         count     = class_counts.get(r, 1)
         w         = total / (n_classes * count)
-        weights[r] = w * w
+        weights[r] = w if mode == "inverse" else w * w
     return weights
 
 
@@ -385,11 +463,78 @@ def get_head_module(model: nn.Module) -> Tuple[Optional[str], Optional[nn.Module
     return None, None
 
 
+def architecture_stages(model: nn.Module, backbone: str):
+    """(container, all child names, stage names) for architectures with real stages.
+
+    A "stage" is a resolution level of the backbone: denseblock1..4 for DenseNet,
+    layer1..4 for ResNet. Returns (None, None, None) when the notion does not apply, in
+    which case only "head" and "all" are meaningful."""
+    if backbone.startswith("densenet"):
+        names = [n for n, _ in model.features.named_children()]
+        return model.features, names, [n for n in names if n.startswith("denseblock")]
+    if backbone.startswith("resnet"):
+        names = [n for n, _ in model.named_children()]
+        return model, names, [n for n in names if n.startswith("layer")]
+    return None, None, None
+
+
+def unfreeze_by_spec(model: nn.Module, backbone: str, spec: str) -> List[str]:
+    """Unfreeze part of the network by an explicit, architecture-independent spec.
+
+        "head"   only the regression head
+        "lastN"  the last N stages of the backbone, plus everything after them
+        "all"    the whole backbone
+
+    This replaces the integer BACKBONE_BLOCKS, whose meaning silently depended on how a
+    backbone happened to nest its modules: torchvision ResNet exposes layer1..layer4 as
+    top-level children, but DenseNet, Xception and DarkNet wrap the entire backbone in a
+    single `features` Sequential, so any value >= 1 unfroze everything and values 1, 2 and
+    4 were indistinguishable. Stages here are the architecture's real ones, so "last1"
+    means the same thing for every backbone that has stages at all.
+
+    Note the stage boundary is taken *inclusive of everything after it*: "last1" on a
+    DenseNet is denseblock4 + norm5, not denseblock4 alone, because the trailing norm
+    belongs to that resolution level."""
+    head_name, head_module = get_head_module(model)
+    freeze_all(model)
+    if head_module is not None:
+        for p in head_module.parameters():
+            p.requires_grad = True
+
+    if spec == "head":
+        return [head_name] if head_name else []
+
+    if spec == "all":
+        for name, module in model.named_children():
+            if name != head_name:
+                for p in module.parameters():
+                    p.requires_grad = True
+        return ["<backbone>"] + ([head_name] if head_name else [])
+
+    if not spec.startswith("last"):
+        raise ValueError(f"unknown unfreeze spec {spec!r} (want 'head', 'all' or 'lastN')")
+    n = int(spec[4:])
+    container, names, stages = architecture_stages(model, backbone)
+    if container is None:
+        raise ValueError(
+            f"unfreeze spec {spec!r} is not defined for backbone {backbone!r}: it exposes "
+            f"no identifiable stages, so only 'head' and 'all' are meaningful")
+    if n > len(stages):
+        raise ValueError(f"{backbone} has {len(stages)} stages, cannot unfreeze last {n}")
+    start = names.index(stages[-n])
+    for name in names[start:]:
+        for p in getattr(container, name).parameters():
+            p.requires_grad = True
+    return names[start:] + ([head_name] if head_name else [])
+
+
 def unfreeze_last_n_blocks(
     model: nn.Module,
     n_backbone_blocks: int = 0,
     always_train_head: bool = True,
 ) -> List[str]:
+    """LEGACY: unfreeze the last n TOP-LEVEL children. Kept so archived experiment
+    configurations keep reproducing exactly. New work should use unfreeze_by_spec."""
     freeze_all(model)
     unfrozen = []
     head_name, head_module = get_head_module(model)
@@ -399,6 +544,11 @@ def unfreeze_last_n_blocks(
 
     if n_backbone_blocks > 0 and backbone_children:
         n = min(n_backbone_blocks, len(backbone_children))
+        if n < n_backbone_blocks:
+            print(f"WARNING: asked to unfreeze {n_backbone_blocks} backbone blocks but this "
+                  f"model exposes only {len(backbone_children)} top-level backbone "
+                  f"module(s) {[c[0] for c in backbone_children]}; unfreezing all of them. "
+                  f"Values above {len(backbone_children)} are indistinguishable here.")
         for name, module in backbone_children[-n:]:
             for p in module.parameters():
                 p.requires_grad = True
@@ -413,14 +563,56 @@ def unfreeze_last_n_blocks(
     return unfrozen
 
 
+def inflate_first_conv(model: nn.Module, in_channels: int) -> str:
+    """Replace the model's first Conv2d to accept `in_channels` instead of 3.
+
+    Pretrained RGB filters are copied; any extra channel (NIR) is initialised to the
+    mean of the RGB filters. Returns the top-level module name to keep trainable."""
+    first_name, first = None, None
+    for name, module in model.named_modules():
+        if isinstance(module, nn.Conv2d):
+            first_name, first = name, module
+            break
+    if first is None or first.in_channels == in_channels:
+        return first_name or ""
+
+    new = nn.Conv2d(in_channels, first.out_channels, first.kernel_size,
+                    stride=first.stride, padding=first.padding,
+                    dilation=first.dilation, groups=first.groups,
+                    bias=first.bias is not None)
+    with torch.no_grad():
+        w = first.weight                      # [out, c_in, kh, kw]
+        c = min(in_channels, w.shape[1])
+        new.weight[:, :c] = w[:, :c]
+        if in_channels > w.shape[1]:
+            new.weight[:, w.shape[1]:] = w.mean(dim=1, keepdim=True).repeat(
+                1, in_channels - w.shape[1], 1, 1)
+        if first.bias is not None:
+            new.bias.copy_(first.bias)
+
+    parent, parts = model, first_name.split(".")
+    for p in parts[:-1]:
+        parent = getattr(parent, p)
+    setattr(parent, parts[-1], new)
+    for p in new.parameters():
+        p.requires_grad = True
+    return parts[0]
+
+
 def build_model(
     backbone: str,
-    backbone_blocks: int,
+    backbone_blocks,          # int (legacy top-level children) | str ("head"/"lastN"/"all")
     use_channel_attention: bool,
     attention_reduction_ratio: int = 4,
     img_size: tuple = (224, 224),
+    in_channels: int = 3,
+    head_dropout: float = 0.0,
 ) -> Tuple[nn.Module, List[str]]:
     """Build backbone, replace head, apply freezing, optionally wrap with HV-CA.
+
+    head_dropout > 0 puts a Dropout on the pooled feature vector right before the final
+    linear layer (as torchvision's EfficientNet head does). The head keeps its attribute
+    name, so freezing and "head only" training treat it exactly as before.
 
     Supported backbones
     -------------------
@@ -498,9 +690,24 @@ def build_model(
                  + list(_TIMM_CHANNELS) + list(_VIT_TIMM_NAMES))
         raise ValueError(f"Unsupported backbone: {backbone!r}. Valid: {valid}")
 
-    unfrozen = unfreeze_last_n_blocks(
-        model, n_backbone_blocks=backbone_blocks, always_train_head=True
-    )
+    # Optional dropout on the input of the regression head (the pooled features).
+    if head_dropout > 0:
+        head_name, head_module = get_head_module(model)
+        assert isinstance(head_module, nn.Linear), f"head is {type(head_module).__name__}"
+        setattr(model, head_name, nn.Sequential(nn.Dropout(head_dropout), head_module))
+
+    # A string selects the stage-aware path; an int keeps the legacy top-level-children
+    # behaviour so archived experiment configurations still reproduce exactly.
+    if isinstance(backbone_blocks, str):
+        unfrozen = unfreeze_by_spec(model, backbone, backbone_blocks)
+    else:
+        unfrozen = unfreeze_last_n_blocks(
+            model, n_backbone_blocks=backbone_blocks, always_train_head=True
+        )
+
+    # ── Adapt the stem to 4-band (R,G,B,NIR) input; new conv stays trainable ──
+    if in_channels != 3:
+        unfrozen = unfrozen + [inflate_first_conv(model, in_channels)]
 
     # ── Post-hoc HVCA wrapping (ResNets and DenseNets only) ─────────────
     # timm CNN models already have HVCA baked in; ViTs don't support it.
@@ -579,13 +786,26 @@ class BONNLoss(nn.Module):
         targets      [B]     float ratings (rounded internally to integer class)
         thresholds   [M-1]   ordered thresholds from BONNThresholds.forward()
         class_counts dict    {class_id: count} from the training set
+
+    Normalisation (added after an audit against the authors' reference code,
+    MLPBayesian-Python, class MLPOrdinal):
+        "batch"  : the reference estimate. For each class present in the batch, the cost is
+                   averaged over THAT class's samples in the batch and multiplied by its prior
+                   (1/M in "amae" mode, N_t/N in "mae" mode). Needs every class in every batch
+                   (see RepresentativeBatchSampler).
+        "legacy" : the original implementation, which divides by the class count of the whole
+                   TRAINING set; the loss is then ~batch/N times too small and very noisy.
+                   Kept only so archived runs reproduce.
     """
 
-    def __init__(self, num_classes: int = 5, mode: str = "amae", sigma: float = 0.3883):
+    def __init__(self, num_classes: int = 5, mode: str = "amae", sigma: float = 0.3883,
+                 normalisation: str = "legacy"):
         super().__init__()
+        assert normalisation in ("legacy", "batch"), normalisation
         self.M     = num_classes
         self.mode  = mode
         self.sigma = sigma
+        self.normalisation = normalisation
 
     def _normal_cdf(self, x: torch.Tensor) -> torch.Tensor:
         """Gaussian CDF K(x) = Φ(x / σ)."""
@@ -611,7 +831,24 @@ class BONNLoss(nn.Module):
             - (d_vals.unsqueeze(1) + 1 - t_f.unsqueeze(0)).abs()
         )
 
-        # Per-sample normalisation weight
+        # K(u_d - z_k) for all threshold-sample pairs: [M-1, B]
+        K_vals = self._normal_cdf(thresholds.unsqueeze(1) - z.unsqueeze(0))
+        per_sample = (cost_diff * K_vals).sum(0)                           # [B]
+
+        if self.normalisation == "batch":
+            # reference: sum over classes of prior_t * mean over the batch's samples of class t.
+            # The constant |M - t| (cost of deciding the top grade) is added back, so the value
+            # is the FULL expected cost in grades (a smoothed MAE / AMAE, always >= 0) instead
+            # of that cost minus a constant; gradients and every comparison are unchanged.
+            total_train = sum(class_counts.values())
+            loss = z.new_zeros(())
+            for c in torch.unique(t_int):
+                prior = (1.0 / M if self.mode == "amae"
+                         else class_counts.get(int(c), 0) / max(total_train, 1))
+                loss = loss + prior * (per_sample[t_int == c].mean() + (M - int(c)))
+            return loss
+
+        # Per-sample normalisation weight (legacy)
         if self.mode == "mae":
             weights = torch.full((N,), 1.0 / max(N, 1), device=z.device)  # [B]
         else:  # "amae": weight by 1/N_t — all classes contribute equally
@@ -621,11 +858,40 @@ class BONNLoss(nn.Module):
             )  # [B]
             weights = 1.0 / n_t
 
-        # K(u_d - z_k) for all threshold-sample pairs: [M-1, B]
-        K_vals = self._normal_cdf(thresholds.unsqueeze(1) - z.unsqueeze(0))
-
         # BC_hat = Σ_{d,k} cost_diff[d,k] * weights[k] * K[d,k]
-        return (cost_diff * K_vals * weights.unsqueeze(0)).sum()
+        return (per_sample * weights).sum()
+
+
+class RepresentativeBatchSampler(torch.utils.data.Sampler):
+    """Batches in which every class appears, as the BONN reference code does
+    (generate_batches(..., mode='representative') in MLPBayesian-Python).
+
+    Class k contributes ceil(batch_size * n_k / N) samples to every batch (at least 1), drawn
+    from a fresh permutation of its samples repeated as needed, so minority classes are
+    repeated rather than missing. The epoch has ceil(N / batch_size) batches. Uses numpy's
+    global RNG, which run_experiment seeds."""
+
+    def __init__(self, labels, batch_size: int, checks_per_epoch: int = 1):
+        # checks_per_epoch > 1: each iteration covers only 1/checks of a pass over the data,
+        # so the trainer can validate several times per pass
+        self.labels = np.asarray(labels).round().astype(int)
+        self.batch_size = batch_size
+        self.classes = np.unique(self.labels)
+        self.n_batches = int(np.ceil(len(self.labels) / batch_size / checks_per_epoch))
+
+    def __iter__(self):
+        N = len(self.labels)
+        pools = []
+        for c in self.classes:
+            idx = np.flatnonzero(self.labels == c)
+            per = int(np.ceil(self.batch_size * len(idx) / N))
+            pools.append((per, np.resize(np.random.permutation(idx), per * self.n_batches)))
+        for b in range(self.n_batches):
+            batch = np.concatenate([pool[b * per:(b + 1) * per] for per, pool in pools])
+            yield np.random.permutation(batch).tolist()
+
+    def __len__(self):
+        return self.n_batches
 
 
 # =========================
@@ -694,8 +960,13 @@ def train_one_epoch(
     augmented_classes: Optional[List[int]] = None,
     bonn_thresholds: Optional[nn.Module] = None,
     bonn_class_counts: Optional[dict] = None,
+    penalty_fn=None,
 ) -> Tuple[float, dict, dict]:
     """Train for one epoch.
+
+    penalty_fn: optional callable returning a scalar tensor added to the loss before the
+    backward pass (e.g. the L2-SP penalty). The reported loss excludes it, so it stays
+    comparable with runs trained without a penalty.
 
     Returns:
         loss           : mean training loss
@@ -726,7 +997,7 @@ def train_one_epoch(
         else:
             loss = loss_vec
 
-        loss.backward()
+        (loss + penalty_fn() if penalty_fn is not None else loss).backward()
         optimizer.step()
 
         running_loss += loss.item() * images.size(0)
