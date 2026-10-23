@@ -147,7 +147,7 @@ def fig_search():
     for (a, _, _), (b, _, _) in zip(bottom[:-1], bottom[1:]):
         arrow(ax, (a - 0.003, y2 + h / 2), (b + w + 0.003, y2 + h / 2))
     ax.text(xs[0] + w / 2, y2 + h / 2, "for one outer fold\n(test group G1).\n\nRepeated for\n"
-            "5 test groups ×\n2 backbones ×\n3 inputs\n= 30 searches", ha="center", va="center",
+            "5 test groups ×\n2 architectures ×\n3 inputs\n= 30 searches", ha="center", va="center",
             fontsize=7, color="#555555")
     ax.text(xs[2] - gap / 2, y1 - 0.045, "inner loop: training and validation groups only",
             ha="center", va="center", fontsize=7, color="#1F5F99")
