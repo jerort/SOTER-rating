@@ -12,6 +12,8 @@ the two reference points, by road group):
   * every figure is the mean over the three specialists; RMSE is the root of the weighted mean
     squared error of each specialist, then averaged.
   * ICC(2,1) and ICC(2,3), Shrout & Fleiss two-way random, absolute agreement, on the gradings.
+  * the All row is the mean of the five group rows, as the candidates are scored, and its segment
+    count is their total.
 Naive baseline (no-skill benchmark): always predicting grade 3, scored with the same grade weights.
 
     python scripts/rating/nested_cv/human_reference.py [--exclude-out-of-scale]
@@ -101,11 +103,15 @@ def main() -> None:
         d[S] = d[S].clip(1, 5)
     rng = np.random.default_rng(SEED)
     rows = []
-    for name, sub in [*((f"G{int(g)}", s) for g, s in d.groupby("group")), ("All", d)]:
+    for name, sub in ((f"G{int(g)}", s) for g, s in d.groupby("group")):
         G, lab = sub[S].to_numpy(int), sub.Etiqueta.to_numpy(int)
         rows.append({"group": name, "segments": len(sub), **fresh_expert(G, lab, rng),
                      **{f"always3_{k}": v for k, v in always3(lab).items()}})
     t = pd.DataFrame(rows).set_index("group")
+    groups = t.copy()
+    t.loc["All"] = groups.mean()                  # mean of the groups, as for the candidates
+    t.loc["All", "segments"] = groups.segments.sum()
+    t["segments"] = t.segments.astype(int)
     pd.set_option("display.width", 220)
     print(t.round(3).to_string())
     out = RESULTS / ("human_reference" + ("_excluded" if a.exclude_out_of_scale else "") + ".csv")

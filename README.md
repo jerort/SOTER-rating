@@ -35,7 +35,7 @@ back to them. `scripts/rating/nested_cv/export_results.py` writes the results wi
 | Paper | Where |
 |---|---|
 | Road-segment extraction | `scripts/roads/` (centroids and 8 m / 51 m rectangles, cropping), `src/preprocessing/`; geometries in `scripts/roads/{layouts,all_clips,cropping_clips}/` |
-| Image labelling | `scripts/rating/data_inspection/` (`labels.xlsx`: consensus label and each specialist's grade; `labels_shp/`) |
+| Image labelling | `scripts/rating/data_inspection/` (`labels.xlsx`: consensus label and each specialist's grade, S1-S3 the three specialists and S4-S5 the two additional ones of the labelling protocol; `labels_shp/`) |
 | Configuration of experiments | `scripts/rating/nested_cv/head_features.py` (feature cache, head training), `src/rating.py` (backbones, BONN loss and thresholds, batch sampler) |
 | Road groups and nested cross-validation | `scripts/rating/nested_cv/common.py` (groups, splits), `nested_cv.py` (searches, refits), split CSVs in `scripts/rating/nested_cv/datasets_pairs/` |
 | Metrics and reference points | `scripts/rating/nested_cv/balanced_metrics.py`, `human_reference.py` |

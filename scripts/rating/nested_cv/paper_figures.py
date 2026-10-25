@@ -40,14 +40,14 @@ SC = 3.54          # single column of the journal, 90 mm
 
 INPUTS = ["30", "15-otf", "15-paired"]
 COL = {"30": "#0072B2", "15-otf": "#E69F00", "15-paired": "#009E73"}       # Okabe-Ito
-NAME = {"30": "native", "15-otf": "otf", "15-paired": "paired"}           # input names in the paper
+NAME = {"30": "native", "15-otf": "OTF", "15-paired": "paired"}           # input names in the paper
 BACKBONE = {"E04": "DenseNet-201", "E11": "ViT-B/16"}
 MARK = {"E04": "o", "E11": "^"}
 GROUPS = [1, 2, 3, 4, 5]
-# the two reference points (manuscript, Appendix / tab:reference-metrics), grade-weighted
-EXPERT = {"qwk": [0.730, 0.782, 0.627, 0.813, 0.784, 0.752],
-          "within1": [0.896, 0.937, 0.819, 0.958, 0.953, 0.915],
-          "mae": [0.695, 0.617, 0.855, 0.592, 0.604, 0.663]}
+# the two reference points (manuscript, tab:reference), grade-weighted; the last value is the mean of the groups
+EXPERT = {"qwk": [0.730, 0.782, 0.627, 0.813, 0.784, 0.747],
+          "within1": [0.896, 0.937, 0.819, 0.958, 0.953, 0.913],
+          "mae": [0.695, 0.617, 0.855, 0.592, 0.604, 0.672]}
 NO_SKILL = {"qwk": 0.0, "within1": 0.600, "mae": 1.200}
 GREY, DARK = "#8C8C8C", "#333333"
 BLUE_BG, ORANGE_BG, RED_BG = "#DCEAF6", "#FBE7C6", "#F6D5D1"
@@ -353,14 +353,14 @@ def fig_references():
     for i, (name, x) in enumerate((("Specialist A", 0.02), ("Specialist B", 0.37),
                                    ("Specialist C", 0.71))):
         box(a1, x, 0.74, 0.27, 0.2, name, "#E8F3E8" if i == 0 else "#F2F2F2", bold_first=False, size=7)
-    box(a1, 0.40, 0.38, 0.58, 0.22, "consensus of B and C\n(a tie: both grades, half each)",
+    box(a1, 0.40, 0.38, 0.58, 0.22, "consensus of B and C\n(a tie: either grade, at random)",
         "#F2F2F2", bold_first=False, size=7)
-    box(a1, 0.0, 0.0, 0.66, 0.24, "A scored against it like a model,\n"
+    box(a1, 0.02, 0.02, 0.66, 0.24, "A scored against it like a model,\n"
         "repeated for B and C, then averaged", "#E8F3E8", bold_first=False, size=7)
     arrow(a1, (0.505, 0.74), (0.62, 0.60))
     arrow(a1, (0.845, 0.74), (0.77, 0.60))
-    arrow(a1, (0.155, 0.74), (0.155, 0.24))
-    arrow(a1, (0.69, 0.38), (0.52, 0.24))
+    arrow(a1, (0.155, 0.74), (0.155, 0.26))
+    arrow(a1, (0.69, 0.38), (0.52, 0.26))
     save(fig, "fig_t7_references_a.pdf")
 
     fig, a2 = plt.subplots(figsize=(SC, 1.9))
