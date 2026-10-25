@@ -86,7 +86,7 @@ def fig_grid():
     (validation group), and a last column with the refit of each outer fold. Every cell shows its
     training groups and its seed: inner split (t, v) uses seed 0..19 in row order, the refit of
     test group t uses seed 100 + t (run_pair_sweep.seed_of, tanda7.REFIT_SEED)."""
-    fig, ax = plt.subplots(figsize=(TW, 2.75))
+    fig, ax = plt.subplots(figsize=(SC, 2.3))      # single column
     ax.set_xlim(-1.3, 7.3)
     ax.set_ylim(-0.2, 5.9)
     ax.axis("off")
@@ -375,9 +375,9 @@ def fig_references():
     a2.set_ylabel("$|3 - y|$")
     a2.set_ylim(0, 3.1)
     a2.set_xticks(grades)
-    a2.text(0.03, 0.98, "$a_{\\mathrm{adj}} = 0.600$\n$|3 - y| \\leq 1$\nfor 3 of 5 grades", transform=a2.transAxes,
-            ha="left", va="top", fontsize=7)
-    a2.text(0.97, 0.98, "$\\kappa = 0$", transform=a2.transAxes, ha="right", va="top", fontsize=7)
+    a2.text(0.03, 0.98, "$a_{\\mathrm{adj}} = 0.600$, $|3 - y| \\leq 1$ for 3 of 5 grades\n"
+            "$\\kappa = 0$, no agreement beyond chance", transform=a2.transAxes, ha="left", va="top",
+            fontsize=7, linespacing=1.4)
     fig.tight_layout()
     save(fig, "fig_t7_references_b.pdf")
 
@@ -401,6 +401,7 @@ def fig_picks():
     ax.text(1.4e-5, 6.0e2, "search space", fontsize=7, color="#777777", va="top")
     hs = [plt.Line2D([], [], ls="", marker=MARK[e], mfc="white", mec="black", label=BACKBONE[e])
           for e in MARK]
+    hs.append(plt.Line2D([], [], ls="", marker="", label=" "))   # blank: one column per item type
     hs += [plt.Line2D([], [], ls="", marker="s", mfc=COL[l], mec="none", label=NAME[l]) for l in INPUTS]
     hs += [plt.Line2D([], [], ls="", marker="o", mfc="white", mec="black", ms=np.sqrt(12 + 9 * e),
                       label=f"$e$ = {e}") for e in (1, 5, 10)]
@@ -411,15 +412,15 @@ def fig_picks():
 
 # ------------------------------------------------------------------ 6. test
 def fig_test():
-    """(a) test QWK and (b) test adjacent accuracy per test group, one file each at single-column
-    width; the legend goes with (b)."""
+    """Test QWK (top) and test adjacent accuracy (bottom) per test group, one single-column image with a shared
+    x axis and one legend under it."""
     p = pd.read_csv(PICKS)
     cands = [(e, l) for e in ("E04", "E11") for l in INPUTS]
-    metrics = [("a", "test_qwk", "qwk", "$\\kappa^{\\mathrm{test}}$"),
-               ("b", "test_within1", "within1", "$a_{\\mathrm{adj}}^{\\mathrm{test}}$")]
+    metrics = [("test_qwk", "qwk", "$\\kappa^{\\mathrm{test}}$"),
+               ("test_within1", "within1", "$a_{\\mathrm{adj}}^{\\mathrm{test}}$")]
     rng = np.random.default_rng(0)
-    for part, col, key, ylab in metrics:
-        fig, ax = plt.subplots(figsize=(SC, 2.0 if part == "a" else 2.9))
+    fig, axes = plt.subplots(2, 1, figsize=(SC, 3.9), sharex=True)
+    for ax, (col, key, ylab) in zip(axes, metrics):
         lo, hi = min(EXPERT[key][:5]), max(EXPERT[key][:5])
         ax.axhspan(lo, hi, color="#E8F3E8", lw=0, zorder=0)
         ax.axhline(EXPERT[key][5], color="#2E7D32", lw=1.0)
@@ -430,24 +431,19 @@ def fig_test():
             ax.scatter(xi + rng.uniform(-0.12, 0.12, len(x)), x[col], s=14, marker=MARK[e],
                        c=COL[l], ec="black", lw=0.3, zorder=3)
             ax.hlines(x[col].mean(), xi - 0.25, xi + 0.25, color="black", lw=1.6, zorder=4)
-        ax.set_xticks([1, 4.4])
-        ax.set_xticklabels(["DenseNet-201", "ViT-B/16"])
         ax.set_xlim(-0.6, 6.0)
         ax.set_ylabel(ylab, rotation=0, ha="right", va="center", labelpad=6)
-        if part == "a":
-            ax.text(5.9, EXPERT[key][5] + 0.01, "human baseline", ha="right", va="bottom", fontsize=6.5,
-                    color="#2E7D32")
-            ax.text(5.9, NO_SKILL[key] + 0.005, "naive baseline", ha="right", va="bottom", fontsize=6.5, color=GREY)
-        else:
-            hs = [plt.Line2D([], [], ls="", marker="s", mfc=COL[l], mec="none",
-                             label=f"{NAME[l]} (satellite view)") for l in INPUTS]
-            hs += [plt.Line2D([], [], color="black", lw=1.6, label="mean of 5 test groups"),
-                   plt.Line2D([], [], color="#2E7D32", lw=1.0, label="human baseline (vehicle-mounted camera view)"),
-                   plt.Line2D([], [], color=GREY, lw=1.0, ls="--", label="naive baseline")]
-            ax.legend(handles=hs, fontsize=6.5, frameon=False, ncol=1, loc="upper center",
-                      bbox_to_anchor=(0.5, -0.14))
-        fig.tight_layout()
-        save(fig, f"fig_t7_test_{part}.pdf")
+    axes[1].set_xticks([1, 4.4])
+    axes[1].set_xticklabels(["DenseNet-201", "ViT-B/16"])
+    hs = [plt.Line2D([], [], ls="", marker="s", mfc=COL[l], mec="none",
+                     label=f"{NAME[l]} (satellite view)") for l in INPUTS]
+    hs += [plt.Line2D([], [], color="black", lw=1.6, label="mean of 5 test groups"),
+           plt.Line2D([], [], color="#2E7D32", lw=1.0, label="human baseline (vehicle-mounted camera view)"),
+           plt.Line2D([], [], color=GREY, lw=1.0, ls="--", label="naive baseline")]
+    axes[1].legend(handles=hs, fontsize=6.5, frameon=False, ncol=1, loc="upper center",
+                   bbox_to_anchor=(0.5, -0.16))
+    fig.tight_layout()
+    save(fig, "fig_t7_test.pdf")
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
